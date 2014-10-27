@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+
+<head>
+    <!--This Vis System was Designed By Ian Wilson-->
+    
+    <title>Tools</title>
+    
+    <!--Web Fonts-->
+    <script>var __adobewebfontsappname__ = "code"</script>
+    <script src="http://use.edgefonts.net/lato:n9,i4,n1,i7,i9,n7,i1,i3,n4,n3:all.js"></script>
+    
+    <!--Stylesheet-->
+    <link rel="stylesheet" type="text/css" href="stylesheet/styles.css">
+    
+    <!--Jquery CDN-->
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    
+    <!--D3-->
+    <script src="lib/d3.min.js"></script>
+    
+    <!--Underscore-->
+    <script src="lib/underscore.js"></script>
+    
+    <!--Simple Statistics-->
+    <script src="https://rawgithub.com/tmcw/simple-statistics/master/src/simple_statistics.js"></script>
+
+</head>
+
+<body>
+    <div id="dataOutput">
+        <h2>Number of Songs:</h2><text id="numSongs"></text>
+        <h2>Average Length:</h2><text id="average"></text>
+        <h2>Shortest Song</h2><text id="shortSong"></text>
+        <h2>Longest Song</h2><text id="longSong"></text>
+        <h2>Standard Deviation</h2><text id="stDev"></text>
+        <h1>Plot</h1>
+        <div id="chart"></div>
+        
+    </div>
+    <script>
+        d3.csv('data2.csv', function(data) {
+            data.forEach(function(d){ d['Innovation'] = +d['Innovation']; }); 
+            
+            //Set number of songs
+            var numSongs = data.length;
+            $('#numSongs').text(numSongs + " songs");
+            
+            
+            //Pluck
+            var dataArray = _.pluck(data, 'Innovation');
+            
+            //Average
+            $('#average').text(d3.mean(dataArray));
+            
+            //Min
+            var dataMin = d3.min(dataArray);
+            console.log(dataMin);
+            var dataMinSongIs = (_.findWhere(data, {Innovation: dataMin})).Country;
+            $('#shortSong').text(dataMin + "-" + dataMinSongIs);
+            
+            //Min
+            var dataMax = d3.max(dataArray);
+            var dataMaxSongIs = (_.findWhere(data, {Innovation: dataMax})).Country;
+            $('#longSong').text(dataMax + "-" + dataMaxSongIs);
+            
+            //StDev
+            // Require simple statistics
+            var stDev = ss.standard_deviation(dataArray)
+            $('#stDev').text(stDev);
+
+            //PlotWav
+            var chunked = ss.quantile(dataArray, 1);
+            console.log(chunked)
+            
+            canvas = d3.select('#chart').append("svg").attr("width", 500).attr("height", 100);
+            
+            canvas.selectAll('bars').data(sorted)
+                    .enter()
+                    .append('rect')
+                    .attr("x", function(d, i) { return 2 * i;})
+                    .attr("y", function(d) { return 100 - (d * 10);})
+                    .attr("height", function(d) { return d * 10;})
+                    .attr("width", 2);
+                    
+            
+            
+        });
+    
+    </script>
+
+</body>
