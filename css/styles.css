@@ -1,0 +1,29 @@
+.filterControls {
+    width:100%;
+    height:50px;
+    background-color:lightgrey;
+}
+
+.timeline {
+    width:100%;
+    height:50px;
+    background-color:lightgrey;
+}
+
+.timelineControls {
+    margin-top:5px;
+    width:100%;
+    height:50px;
+    background-color:lightgrey;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.area {
+  fill: lightsteelblue;
+}
