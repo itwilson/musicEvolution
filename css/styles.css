@@ -27,3 +27,21 @@
 .area {
   fill: lightsteelblue;
 }
+
+.node {
+  border: solid 1px white;
+  font: 10px sans-serif;
+  line-height: 12px;
+  overflow: hidden;
+  position: absolute;
+  text-indent: 2px;
+}
+
+#genre1cloud {
+    display:inline-block;
+}
+
+#genre2cloud {
+    display:inline-block;
+    margin-left:20px;
+}
