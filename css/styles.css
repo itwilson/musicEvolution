@@ -6,8 +6,9 @@
 
 .timeline {
     width:100%;
-    height:50px;
+    height:100px;
     background-color:lightgrey;
+
 }
 
 .timelineControls {
@@ -44,4 +45,158 @@
 #genre2cloud {
     display:inline-block;
     margin-left:20px;
+}
+
+select {
+    border: 1px solid #ccc;
+    padding: 13px 15px;
+    color: #343434;
+    background-color: #fff;
+    background-image: url(form-arrow.jpg);
+    background-position: right center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    position: relative;
+    width:200px;
+    height:40px;
+    margin-top:5px;
+}
+
+#playbar {
+    position:relative;
+    display:inline-block;
+    margin-left:20px;
+    margin-top:20px;
+    width:500px;
+    height: 50px;
+    border:1px solid grey;
+    background-image: url("../images/playbar.png");
+}
+
+.decadeContainer{
+    position:absolute;
+    width:500px;
+    height:25px;
+    z-index:2;
+}
+
+.decadeContainerBottom{
+    position:relative;
+    margin-top:25px;
+    width:500px;
+    height:25px;
+    z-index:2;
+}
+
+.decade {
+    width:20%;
+    height:100%;
+    display:inline-block;
+}
+
+.decade:hover {
+    background-color:#4c3b91;
+    cursor: pointer;
+}
+
+#topRange {
+    position:absolute;
+    background-color:lightgreen;
+    display:block;
+    width:500px;
+    height:23px;
+    z-index:1;
+}
+
+#rangeContainer {
+    position:relative;
+    top:-5px;
+    display:inline-block;
+}
+
+#topRangeText {
+    margin-bottom:9px;
+}
+
+#bottomRange {
+    position:absolute;
+    top:25px;
+    background-color:lightblue;
+    display: block;
+    width:500px;
+    height:23px;
+    z-index:1
+}
+
+#topLeftBound {
+    position:absolute;
+    top:-15px;
+    height:15px;
+    width:3px;
+    background-color:red;
+    cursor:pointer;
+    left:0px;
+}
+
+#topRightBound {
+    position:absolute;
+    top:-15px;
+    height:15px;
+    width:3px;
+    background-color:red;
+    cursor:pointer;
+    left:495px;
+}
+
+#bottomLeftBound {
+    position:absolute;
+    bottom:-15px;
+    height:15px;
+    width:3px;
+    background-color:red;
+    cursor:pointer;
+    left:0px;
+}
+
+#bottomRightBound {
+    position:absolute;
+    bottom:-15px;
+    height:15px;
+    width:3px;
+    background-color:red;
+    cursor:pointer;
+    left:495px;
+}
+
+#playCursorTop {
+    position:absolute;
+    height:23px;
+    width:5px;
+    background-color:green;
+    cursor:pointer;
+    left:0px;
+    z-index:3;
+}
+
+#playCursorBottom {
+    position:absolute;
+    height:23px;
+    width:5px;
+    background-color:blue;
+    cursor:pointer;
+    left:0px;
+    bottom:0;
+    z-index:3;
+}
+
+
+.button {
+    margin-top:20px;
+    margin-left:20px;
+    padding:2px;
+    width:35px;
+    height:25px;
+    border:1px solid grey;
+    cursor:pointer;
+    display:inline-block;
 }

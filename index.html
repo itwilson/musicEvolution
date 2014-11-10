@@ -54,17 +54,62 @@
       <div class="container">
             <div class="filterControls">
                 top filter Controls
+                <select>
+                    <option>Rock</option>
+                    <option>Pop</option>
+                </select>
+                <select>
+                    <option>Pop</option>
+                    <option>Rock</option>
+                </select>
             </div>
             <!--Angular templating-->
             <div ng-view></div>
             
             <div class="timeline">
-                Timeline Controls
+                <div id="playbar">
+                    <div id="topRange" class="bound"></div>
+                        <div id="topLeftBound" class=".boundBarTop"></div>
+                        <div id="playCursorTop"></div>
+                        <div id="topRightBound" class=".boundBarTop"></div>
+                        <div class="decadeContainer">
+                            <div id="1960sTop" class="decade"></div><!--
+                            --><div id="1970sTop" class="decade"></div><!--
+                            --><div id="1980sTop" class="decade"></div><!--
+                            --><div id="1990sTop" class="decade"></div><!--
+                            --><div id="2000sTop" class="decade"></div>
+                        </div>
+                    <div id="bottomRange" class"bound"></div>
+                        <div id="bottomLeftBound" class=".boundBarTop"></div>
+                        <div id="playCursorBottom"></div>
+                        <div id="bottomRightBound" class=".boundBarTop"></div>
+                        <div class="decadeContainerBottom">
+                            <div id="1960sBottom" class="decade"></div><!--
+                            --><div id="1970sBottom" class="decade"></div><!--
+                            --><div id="1980sBottom" class="decade"></div><!--
+                            --><div id="1990sBottom" class="decade"></div><!--
+                            --><div id="2000sBottom" class="decade"></div>
+                        </div>
+                </div>
+                <div id="rangeContainer">
+                    <div id="topRangeText"><span id="topStart">1960</span><span>-</span><span id="topEnd">2010</span><span>&ensp;&ensp; Current(</span><span id="topCurrent">1960</span><span>)</span></div>
+                    <div id="bottomRangeText"><span id="bottomStart">1960</span><span>-</span><span id="bottomEnd">2010</span><span>&ensp;&ensp; Current(</span><span id="bottomCurrent">1960</span><span>)</span></div>
+                </div>
+                </div>
             </div>
           
+            
+          
             <div class="timelineControls">
-                Timeline Controls
+                <div id="start" class="button">Start</div>
+                <div id="back" class="button">Back</div>
+                <div id="play" class="button">Play</div>
+                <div id="stop" class="button" onclick="stopButton()">Stop</div>
+                <div id="next" class="button">Next</div>
+                <div id="end" class="button">End</div>
             </div>
+          
+            
       </div>
 
       <!-- FOOTER -->
@@ -81,13 +126,24 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-      <script src="js/activator.js"></script>
+    <script src="js/activator.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.2/jquery-ui.min.js"></script>
+    <script src="js/playcontrol.js"></script>
+      
+      
       
     <!--ANGULAR-->    
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-route.js"></script>
     <script src="js/app.js"></script>
-      
+        
+    <!--Controllers-->
+    <script src="js/mainController.js"></script>
+    <script src="js/metaController.js"></script> 
+    <script src="js/locationController.js"></script>  
+    <script src="js/lyricsController.js"></script>
+    <script src="js/subgenreController.js"></script>
+          
     <!--D3.js-->
     <script src="lib/d3.min.js"></script> 
     
