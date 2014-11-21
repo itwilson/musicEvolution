@@ -54,17 +54,49 @@
       <div class="container">
             <div class="filterControls">
                 top filter Controls
+               
+                
                 <select>
                     <option>Rock</option>
                     <option>Pop</option>
                 </select>
+                VS
                 <select>
                     <option>Pop</option>
                     <option>Rock</option>
                 </select>
             </div>
+          
+        <div class="container">
+            <div class="filterControls" id="viewSelections"> 
+               <select id="viewSelect1">
+                    <option selected>Waveform</option>
+                    <option>Location</option>
+                    <option>Lyrics</option>
+                    <option>Subgenres</option>
+                </select>
+                <select id="viewSelect2">
+                    <option>Waveform</option>
+                    <option selected>Location</option>
+                    <option>Lyrics</option>
+                    <option>Subgenres</option>
+                </select>
+            </div>
+        </div>
+          
             <!--Angular templating-->
-            <div ng-view></div>
+            <div class="songData" ng-include src="'partial/meta.html'"></div>
+            <hr  />
+          
+            <div id="views" ng-controller="viewController">
+                <div class="infoView"id="view1">
+                    <div ng-include src="'partial/waveform.html'"></div>
+                </div>
+                <div class="infoView" id="view2">
+                    <div ng-include src="'partial/location.html'"></div>
+                </div>
+            </div>
+            
             
             <div class="timeline">
                 <div id="playbar">
@@ -80,9 +112,9 @@
                             --><div id="2000sTop" class="decade"></div>
                         </div>
                     <div id="bottomRange" class"bound"></div>
-                        <div id="bottomLeftBound" class=".boundBarTop"></div>
+                        <div id="bottomLeftBound" class="boundBarTop"></div>
                         <div id="playCursorBottom"></div>
-                        <div id="bottomRightBound" class=".boundBarTop"></div>
+                        <div id="bottomRightBound" class="boundBarTop"></div>
                         <div class="decadeContainerBottom">
                             <div id="1960sBottom" class="decade"></div><!--
                             --><div id="1970sBottom" class="decade"></div><!--
@@ -130,21 +162,7 @@
     <script src="https://code.jquery.com/ui/1.11.2/jquery-ui.min.js"></script>
     <script src="js/playcontrol.js"></script>
       
-      
-      
-    <!--ANGULAR-->    
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-route.js"></script>
-    <script src="js/app.js"></script>
-        
-    <!--Controllers-->
-    <script src="js/mainController.js"></script>
-    <script src="js/metaController.js"></script> 
-    <script src="js/locationController.js"></script>  
-    <script src="js/lyricsController.js"></script>
-    <script src="js/subgenreController.js"></script>
-          
-    <!--D3.js-->
+     <!--D3.js-->
     <script src="lib/d3.min.js"></script> 
     
     <!--D3 Cloudlayout-->
@@ -157,8 +175,25 @@
     <script src="https://rawgithub.com/tmcw/simple-statistics/master/src/simple_statistics.js"></script>
       
     <!--Topo JSON for the map work-->
-    <script src="lib/topojson.js"></script>
-    
+    <script src="lib/topojson.js"></script>  
       
+    <!--ANGULAR-->    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-route.js"></script>
+    <script src="js/app.js"></script>    
+        
+    <!--Controllers-->
+    <script src="js/mainController.js"></script>
+    <script src="js/metaController.js"></script>
+    <script src="js/waveformController.js"></script>
+    <script src="js/locationController.js"></script>  
+    <script src="js/lyricsController.js"></script>
+    <script src="js/subgenreController.js"></script>
+          
+   
+    
+    <!--View Selector-->
+    <script src="js/viewSelector.js"></script>
+        
   </body>
 </html>

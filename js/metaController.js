@@ -64,59 +64,7 @@ infovisApp.controller('metaController', function($scope) {
             //Pluck the keys for popover used later
             var sortedKeys = _.keys(sortData);
 
-            //Create a canvas
-            canvas = d3.select('#chart').append("svg").attr("width", 350).attr("height", 200).attr('id', index);
-
-
-            if (index < 5) {
-                var area = d3.svg.area()
-                    .interpolate("basis")
-                    .x(function(d, i) { return (7 * i);})
-                    .y0(200)
-                    .y1(function(d) { return 200 - (d * 10);});
-
-
-                canvas.append("path")
-                    .datum(sortedValues)
-                    .attr("class", "area")
-                    .attr("d", area);
-
-                //Append our bars on the top
-                canvas.selectAll('bars').data(sortedValues)
-                    .enter()
-                    .append('rect')
-                    .attr("x", function(d, i) { return 7 * i;})
-                    .attr("y", function(d) { return 200 - (d * 10);})
-                    .attr("height", function(d) { return d * 15;})
-                    .attr("width", 5)
-                    .style('fill', 'steelblue');
-
-
-
-            } else {
-                var area = d3.svg.area()
-                    .interpolate("basis")
-                    .x(function(d, i) { return (7 * i);})
-                    .y0(0)
-                    .y1(function(d) { return d * 15;});
-
-
-                canvas.append("path")
-                    .datum(sortedValues)
-                    .attr("class", "area")
-                    .attr("d", area);
-
-
-                //Append our bars on the bottom
-                canvas.selectAll('bars').data(sortedValues)
-                .enter()
-                .append('rect')
-                .attr("x", function(d, i) { return 7 * i;})
-                .attr("y", function(d) { return 0;})
-                .attr("height", function(d) { return d * 15;})
-                .attr("width", 5)
-                .style('fill', 'darkgreen');
-            };
+           
         };
 
 
