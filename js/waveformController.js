@@ -58,7 +58,7 @@ d3.csv('data2.csv', function(data) {
         var sortedKeys = _.keys(sortData);
 
         //Create a canvas
-        canvas = d3.select('#chart').append("svg").attr("width", "25%").attr("height", 200).attr('id', index);
+        canvas = d3.select('#chart').append("svg").attr("width", "24%").attr("height", 200).attr('id', index).style("margin-right", "1%");
 
 
         if (index < 5) {
@@ -78,18 +78,17 @@ d3.csv('data2.csv', function(data) {
             canvas.selectAll('bars').data(sortedValues)
                 .enter()
                 .append('rect')
-                .attr("x", function(d, i) { return 7 * i;})
+                .attr("x", function(d, i) { return 4.75 * i;})
                 .attr("y", function(d) { return 200 - (d * 10);})
                 .attr("height", function(d) { return d * 15;})
-                .attr("width", 5)
-                .style('fill', 'steelblue');
-
-
+                .attr("width", 3)
+                .style('fill', 'steelblue')
+                .attr("class", "topBars");
 
         } else {
             var area = d3.svg.area()
                 .interpolate("basis")
-                .x(function(d, i) { return (7 * i);})
+                .x(function(d, i) { return (5 * i);})
                 .y0(0)
                 .y1(function(d) { return d * 15;});
 
@@ -104,11 +103,12 @@ d3.csv('data2.csv', function(data) {
             canvas.selectAll('bars').data(sortedValues)
             .enter()
             .append('rect')
-            .attr("x", function(d, i) { return 7 * i;})
+            .attr("x", function(d, i) { return 4.75 * i;})
             .attr("y", function(d) { return 0;})
             .attr("height", function(d) { return d * 15;})
-            .attr("width", 5)
-            .style('fill', 'darkgreen');
+            .attr("width", 3)
+            .style('fill', 'darkgreen')
+            .attr("class", "bottomBars");
         };
     };
 
@@ -119,7 +119,7 @@ d3.csv('data2.csv', function(data) {
     waveSection('Education', .2, 2);
     waveSection('KEI', .2, 3);
     waveSection('ICT', .2, 4);
-    waveSection('Business', .2, 5);
+    waveSection('ICT', .2, 7);
     waveSection('KI', .2, 6);
     waveSection('Economic', .2, 7);
     waveSection('Education', .2, 7);
@@ -129,4 +129,6 @@ d3.csv('data2.csv', function(data) {
 
 
 });
+
+
 

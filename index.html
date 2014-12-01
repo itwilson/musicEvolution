@@ -51,23 +51,14 @@
 
     <!--==================================================-->
     <!-- Wrap the rest of the page in another container to center all the content. -->
-      <div class="container">
-            <div class="filterControls">
-                top filter Controls
-               
-                
-                <select>
-                    <option>Rock</option>
-                    <option>Pop</option>
-                </select>
-                VS
-                <select>
-                    <option>Pop</option>
-                    <option>Rock</option>
-                </select>
-            </div>
           
-        <div class="container">
+        
+          
+            <!--Angular templating-->
+            <div class="songData" ng-include src="'partial/meta.html'"></div>
+            <hr  />
+                
+            <div class="container">
             <div class="filterControls" id="viewSelections"> 
                <select id="viewSelect1">
                     <option selected>Waveform</option>
@@ -77,23 +68,17 @@
                 </select>
                 <select id="viewSelect2">
                     <option>Waveform</option>
-                    <option selected>Location</option>
+                    <option >Location</option>
                     <option>Lyrics</option>
-                    <option>Subgenres</option>
+                    <option selected>Subgenres</option>
                 </select>
             </div>
-        </div>
-          
-            <!--Angular templating-->
-            <div class="songData" ng-include src="'partial/meta.html'"></div>
-            <hr  />
-          
             <div id="views" ng-controller="viewController">
                 <div class="infoView"id="view1">
                     <div ng-include src="'partial/waveform.html'"></div>
                 </div>
                 <div class="infoView" id="view2">
-                    <div ng-include src="'partial/location.html'"></div>
+                    <div ng-include src="'partial/subgenres.html'"></div>
                 </div>
             </div>
             
@@ -111,7 +96,7 @@
                             --><div id="1990sTop" class="decade"></div><!--
                             --><div id="2000sTop" class="decade"></div>
                         </div>
-                    <div id="bottomRange" class"bound"></div>
+                    <div id="bottomRange" class="bound"></div>
                         <div id="bottomLeftBound" class="boundBarTop"></div>
                         <div id="playCursorBottom"></div>
                         <div id="bottomRightBound" class="boundBarTop"></div>

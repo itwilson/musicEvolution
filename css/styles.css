@@ -9,13 +9,21 @@
 }
 
 #viewSelections{
-    background-color:darkgrey;
+    position:relative;
+}
+
+#viewSelect1 {
+    margin-left:10px;
+}
+
+#viewSelect2 {
+    position:absolute;
+    left:50%;
 }
 
 .filterControls {
     width:100%;
     height:50px;
-    background-color:lightgrey;
 }
 
 .timeline {
@@ -215,6 +223,10 @@ select {
 }
 
 /* META DATA VIEW STYLES */
+#dataOutput{
+    padding-left:10px;
+}
+
 .datum {
     display:inline-block;
     margin-left:20px;
@@ -222,4 +234,9 @@ select {
 
 .datum h2 {
     font-size:16px;
+}
+
+/* VIEW STYLES FOR THE VIEWS */
+#view1 {
+    margin-left:10px;
 }

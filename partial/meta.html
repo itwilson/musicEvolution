@@ -1,17 +1,34 @@
 <!--Waveform View-->
 <div ng-controller="metaController">
-    <div id="dataOutput">
-        <div class="datum"><h1>Rock</h1></div>
+    <div id="dataOutput">                
+        <select id="genre1">
+            <option selected>Rock</option>
+            <option>Pop</option>
+            <option>Dance</option>
+        </select>
         <div class="datum"><h2>Number of Songs:</h2><text id="numSongs"></text></div>
         <div class="datum"><h2>Average Length:</h2><text id="average"></text></div>
-        <div class="datum"><h2>Shortest Song</h2><text id="shortSong"></text></div>
-        <div class="datum"><h2>Longest Song</h2><text id="longSong"></text></div>
         <div class="datum"><h2>Standard Deviation</h2><text id="stDev"></text></div>
-        <div class="datum"><h1>Pop</h1></div>
+        <select id="genre1">
+            <option>Rock</option>
+            <option selected>Pop</option>
+            <option>Dance</option>
+        </select>
         <div class="datum"><h2>Number of Songs:</h2><text id="numSongs"></text></div>
         <div class="datum"><h2>Average Length:</h2><text id="average"></text></div>
-        <div class="datum"><h2>Shortest Song</h2><text id="shortSong"></text></div>
-        <div class="datum"><h2>Longest Song</h2><text id="longSong"></text></div>
         <div class="datum"><h2>Standard Deviation</h2><text id="stDev"></text></div>
     </div>
+    
+    <script>
+        $('#genre1').change(function(){
+            var valSelected = $( "#genre1 option:selected" ).text();
+            
+            if(valSelected = "rock") {
+                $('.topBars').css("color", "steelblue");
+            }
+            
+        });
+    
+    
+    </script>
 </div>

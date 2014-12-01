@@ -73,7 +73,7 @@
                                     drag: function( event, ui ) {
                                         var newPosition = $('#playCursorTop').css('left').replace(/px/g,'');
                                         var newValue = Math.floor((parseFloat(newPosition) / 10) + 1960);
-                                        $('#topCurrent').text(newValue);    
+                                        $('#topCurrent').text(newValue);  
                                     }
                                   });
     $('#playCursorBottom').draggable({ containment: "#playbar", axis: "x" });
@@ -115,6 +115,9 @@
             step: function() {
                 currentPositionTop = parseFloat($('#playCursorTop').css('left')) + 50;
                 var newPositionTop = Math.floor((startPositionTop / 50));
+                var newPosition = $('#playCursorTop').css('left').replace(/px/g,'');
+                var newValue = Math.floor((parseFloat(newPosition) / 10) + 1960);
+                $('#topCurrent').text(newValue); 
                 $('#stageNum').text(newPositionTop);
             },
             easing:'linear'
@@ -135,6 +138,9 @@
             step: function() {
                 startPositionBottom = parseFloat($('#playCursorBottom').css('left')) + 50;
                 var newPositionBottom = Math.floor((startPositionBottom / 50));
+                var newPosition = $('#playCursorBottom').css('left').replace(/px/g,'');
+                var newValue = Math.floor((parseFloat(newPosition) / 10) + 1960);
+                $('#bottomCurrent').text(newValue); 
                 $('#stageNum').text(newPositionBottom);
             },
             easing:'linear'
