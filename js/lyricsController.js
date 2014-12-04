@@ -12,7 +12,7 @@ var edititedWords = function(){
                                 };
                             };
                         };
-                        console.log(wordsUnedited);
+                        
     
 };
 

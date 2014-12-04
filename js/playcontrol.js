@@ -74,9 +74,20 @@
                                         var newPosition = $('#playCursorTop').css('left').replace(/px/g,'');
                                         var newValue = Math.floor((parseFloat(newPosition) / 10) + 1960);
                                         $('#topCurrent').text(newValue);  
+                                        getData(1);
+                                        waveUpdate()
                                     }
                                   });
-    $('#playCursorBottom').draggable({ containment: "#playbar", axis: "x" });
+    $('#playCursorBottom').draggable({ containment: "#playbar", 
+                                    axis: "x",
+                                    drag: function( event, ui ) {
+                                        var newPosition = $('#playCursorBottom').css('left').replace(/px/g,'');
+                                        var newValue = Math.floor((parseFloat(newPosition) / 10) + 1960);
+                                        $('#bottomCurrent').text(newValue);  
+                                        getData(2);
+                                        waveUpdata();
+                                    }
+                                  });
     
 
     
@@ -119,6 +130,8 @@
                 var newValue = Math.floor((parseFloat(newPosition) / 10) + 1960);
                 $('#topCurrent').text(newValue); 
                 $('#stageNum').text(newPositionTop);
+                getData(1);
+                waveUpdate();
             },
             easing:'linear'
             }
@@ -142,6 +155,8 @@
                 var newValue = Math.floor((parseFloat(newPosition) / 10) + 1960);
                 $('#bottomCurrent').text(newValue); 
                 $('#stageNum').text(newPositionBottom);
+                getData(2);
+            
             },
             easing:'linear'
             }
@@ -163,6 +178,7 @@
         var newPositionBottom = $('#playCursorBottom').css('left').replace(/px/g,'');
         var newValueBottom = Math.floor((parseFloat(newPositionBottom) / 10) + 1960);
         $('#bottomCurrent').text(newValueBottom); 
+        
     });
 
     $('#end').click(function() {
@@ -177,6 +193,7 @@
         var newPositionBottom = $('#playCursorBottom').css('left').replace(/px/g,'');
         var newValueBottom = Math.floor((parseFloat(newPositionBottom) / 10) + 1960);
         $('#bottomCurrent').text(newValueBottom); 
+        
     });
 
     $('#next').click(function() {
@@ -238,3 +255,9 @@
             $('#bottomEnd').text(Math.floor((bottomEnd / 10) + 1960));
         };
     });
+
+
+    var updateWave = function(){
+        
+        
+    };

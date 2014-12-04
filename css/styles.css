@@ -122,7 +122,7 @@ select {
 
 #topRange {
     position:absolute;
-    background-color:lightgreen;
+    background-color:steelblue;
     display:block;
     width:500px;
     height:23px;
@@ -142,7 +142,7 @@ select {
 #bottomRange {
     position:absolute;
     top:25px;
-    background-color:lightblue;
+    background-color:#006400;
     display: block;
     width:500px;
     height:23px;
@@ -192,22 +192,28 @@ select {
 #playCursorTop {
     position:absolute;
     height:23px;
-    width:5px;
-    background-color:green;
+    width:10px;
+    background-color:steelblue;
     cursor:pointer;
     left:0px;
     z-index:3;
+    border:1px solid white;
+}
+
+tr{
+    overflow-x:scroll;
 }
 
 #playCursorBottom {
     position:absolute;
     height:23px;
-    width:5px;
-    background-color:blue;
+    width:10px;
+    background-color:#1b5c1b;
     cursor:pointer;
     left:0px;
     bottom:0;
     z-index:3;
+    border:1px solid white;
 }
 
 
@@ -229,14 +235,48 @@ select {
 
 .datum {
     display:inline-block;
-    margin-left:20px;
+    margin-left:14px;
 }
 
 .datum h2 {
-    font-size:16px;
+    font-size:12px;
 }
 
 /* VIEW STYLES FOR THE VIEWS */
 #view1 {
     margin-left:10px;
+    
 }
+
+#view2{
+    overflow-x: scroll;
+}
+
+#genre1 {
+    height:40px;
+    font-size:30px;
+    background-color:steelblue;
+    color:white;
+}
+
+#genre2 {
+    height:40px;
+    font-size:30px;
+    background-color:rgb(0, 100, 0);
+    color:white;
+}
+
+/* WAVEFORM STYLES */
+.waveformLabel{
+    display: inline-block;
+    width: 24%;
+    text-align: center;
+    margin-right:1%;
+}
+
+.waveform {
+    display: inline-block;
+    width:24%;
+    margin-right:1%;
+}
+

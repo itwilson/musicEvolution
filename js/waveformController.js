@@ -1,134 +1,369 @@
 
-d3.csv('data2.csv', function(data) {
-    data.forEach(function(d){ d['Innovation'] = +d['Innovation']; }); 
-
-    //Set number of songs
-    var numSongs = data.length;
-
-
-    //Pluck
-    var dataArray = _.pluck(data, 'Innovation');
-    var dataArray2 = _.pluck(data, 'ICT');
-    var dataArray3 = _.pluck(data, 'KEI');
-
-    //Average
-
-    //Min
-    var dataMin = d3.min(dataArray);
-    var dataMinSongIs = (_.findWhere(data, {Innovation: dataMin})).Country;
-
-    //Min
-    var dataMax = d3.max(dataArray);
-    var dataMaxSongIs = (_.findWhere(data, {Innovation: dataMax})).Country;
-
-    //StDev
-    // Require simple statistics
-    var stDev = ss.standard_deviation(dataArray)
-
     ///////////////////////////////////
-    //PlotWav//////////////////////////
+    //GetData Function//////////////////////////
     ///////////////////////////////////
 
+    /*d3.csv('data/rock4.csv', function(data) {
+    
+        var tableHead = $('#tableHead');
+        for (i = 0.2; i < 1;){
+              tableHead.append("<th>" + i + "</th>");
+            i += .02
+        };
+        
+        
+        for (y = 1960; y < 2015; y++){
+            var year = (y).toString();
+            var thisYear = _.where(data, {Year: year});
+            var durationValues = _.pluck(thisYear, 'Hotness');
 
 
-    var waveSection = function(metric, chunk, index) {
-        //Create array of values for metric from argument
-        var dataArray = _.pluck(data, metric);
 
-        //Create an array of objects for how many values are in each chunk for bars
-        var sortData = _.countBy(dataArray, function(num) {
-            for (i = 1; i < 11;) {
-                if (num < i) {
-                    return i - 1;
-                    break;
+
+            var durChunks = _.countBy(durationValues, function(num) {
+                for (i = 0.2; i < 1;) {
+                    if (num < i) {
+                        return i;
+                        break;
+                    };
+                    i += .02;
                 };
-                i += chunk;
+            });
+
+            
+
+            var dataTable = $('#dataTable');
+
+            dataTable.append("<tr id ='" + year + "'></tr>");
+            $("#" + year).append("<td>" + year + "</td>");
+
+            dataTable
+            for (i = 0.2; i < 1; i+=.02){
+                if(durChunks.hasOwnProperty(i)){
+                    $("#" + year).append("<td>" + durChunks[i] + "</td>");
+
+                    
+
+
+                }else{
+                    
+                    $("#" + year).append("<td>" + 0 + "</td>");
+
+                };
             };
-        });
+        };
+        
+    
+        
+    });*/
+
+
+///////////////////////////////////
+//PlotWav//////////////////////////
+///////////////////////////////////
+
+//Top Waves
+$('#wave1').append('<div id="durationTop" class="waveform"></div>');
+$('#wave1').append('<div id="loudnessTop" class="waveform"></div>');
+$('#wave1').append('<div id="tempoTop" class="waveform"></div>');
+$('#wave1').append('<div id="hotnessTop" class="waveform"></div>');
+
+//Labels
+$('#wave1').append('<div class="waveformLabel">Tempo</div>');
+$('#wave1').append('<div class="waveformLabel">Loudness</div>');
+$('#wave1').append('<div class="waveformLabel">Length</div>');
+$('#wave1').append('<div class="waveformLabel">Hotness</div>'); 
+
+//Bottom Waves
+$('#wave1').append('<div id="durationBottom" class="waveform"></div>');
+$('#wave1').append('<div id="loudnessBottom" class="waveform"></div>');
+$('#wave1').append('<div id="tempoBottom" class="waveform"></div>');
+$('#wave1').append('<div id="hotnessBottom" class="waveform"></div>'); 
+
+var durationTop = d3.select('#durationTop').append("svg").attr("width", "100%").attr("height", 200);
+var loudnessTop = d3.select('#loudnessTop').append("svg").attr("width", "100%").attr("height", 200);
+var tempoTop = d3.select('#tempoTop').append("svg").attr("width", "100%").attr("height", 200);
+var hotnessTop = d3.select('#hotnessTop').append("svg").attr("width", "100%").attr("height", 200);
+var durationBottom = d3.select('#durationBottom').append("svg").attr("width", "100%").attr("height", 200);
+var loudnessBottom = d3.select('#loudnessBottom').append("svg").attr("width", "100%").attr("height", 200);
+var tempoBottom = d3.select('#tempoBottom').append("svg").attr("width", "100%").attr("height", 200);
+var hotnessBottom = d3.select('#hotnessBottom').append("svg").attr("width", "100%").attr("height", 200);
 
 
 
 
-        //Pluck the values for bars
-        var sortedValues = _.values(sortData);
+var wavePlot = function() {
 
-
-
-        //Pluck the keys for popover used later
-        var sortedKeys = _.keys(sortData);
-
-        //Create a canvas
-        canvas = d3.select('#chart').append("svg").attr("width", "24%").attr("height", 200).attr('id', index).style("margin-right", "1%");
-
-
-        if (index < 5) {
-            var area = d3.svg.area()
-                .interpolate("basis")
-                .x(function(d, i) { return (7 * i);})
-                .y0(200)
-                .y1(function(d) { return 200 - (d * 10);});
-
-
-            canvas.append("path")
-                .datum(sortedValues)
-                .attr("class", "area")
-                .attr("d", area);
-
-            //Append our bars on the top
-            canvas.selectAll('bars').data(sortedValues)
-                .enter()
-                .append('rect')
-                .attr("x", function(d, i) { return 4.75 * i;})
-                .attr("y", function(d) { return 200 - (d * 10);})
-                .attr("height", function(d) { return d * 15;})
-                .attr("width", 3)
-                .style('fill', 'steelblue')
-                .attr("class", "topBars");
-
-        } else {
-            var area = d3.svg.area()
-                .interpolate("basis")
-                .x(function(d, i) { return (5 * i);})
-                .y0(0)
-                .y1(function(d) { return d * 15;});
-
-
-            canvas.append("path")
-                .datum(sortedValues)
-                .attr("class", "area")
-                .attr("d", area);
-
-
-            //Append our bars on the bottom
-            canvas.selectAll('bars').data(sortedValues)
+//Get the years
+    var topYear = $('#topCurrent').text();
+    var bottomYear = $('#bottomCurrent').text();
+    
+    var numSongsTop = parseInt($('#numSongs1').text());
+    
+    //Plot the duration values for top
+    d3.csv('data/duration.csv', function(data) {
+        
+        var durData = _.where(data, {Year: topYear});
+        delete durData[0]["Year"];
+        
+        
+        var durValues = _.values(durData[0]);
+        
+        
+        
+        durationTop.selectAll('rect').data(durValues)
             .enter()
             .append('rect')
-            .attr("x", function(d, i) { return 4.75 * i;})
-            .attr("y", function(d) { return 0;})
-            .attr("height", function(d) { return d * 15;})
-            .attr("width", 3)
-            .style('fill', 'darkgreen')
-            .attr("class", "bottomBars");
-        };
-    };
+            .attr("x", function(d, i) { return 5.75 * i;})
+            .attr("y", function(d) { return 200 - ((d/numSongsTop) * 1600);})
+            .attr("height", function(d) { return (d/numSongsTop) * 1600;})
+            .attr("width", 5.5)
+            .style('fill', 'steelblue')
+            .attr("class", "topBars");
+        
+        //Update Functions
+        $('#start, #end').click(function() {
+            var numSongsTop = parseInt($('#numSongs1').text());
+            d3.csv('data/duration.csv', function(data) {
+                var topYear = $('#topCurrent').text();
+
+                var durData = _.where(data, {Year: topYear});
+                delete durData[0]["Year"];
+
+                var durValues = _.values(durData[0]);
+                //Update all rects
+                        durationTop.selectAll("rect")
+                                .data(durValues)
+                                    .transition()
+                                    .duration(2000)
+                                    .attr("y", function(d) { return 200 - ((d/numSongsTop) * 1600);})
+                                    .attr("height", function(d) { return (d/numSongsTop) * 1600;});
+            });
+        });
+    });
+    
+    //Plot the loudness values for top
+    d3.csv('data/loudness.csv', function(data) {
+        
+        var loudData = _.where(data, {Year: topYear});
+        delete loudData[0]["Year"];
+        
+        
+        var loudValues = _.values(loudData[0]);
+        
+
+        
+        loudnessTop.selectAll('bars').data(loudValues)
+            .enter()
+            .append('rect')
+            .attr("x", function(d, i) { return 5.75 * i;})
+            .attr("y", function(d) { return 200 - ((d/numSongsTop) * 1600);})
+            .attr("height", function(d) { return (d/numSongsTop) *1600;})
+            .attr("width", 5.5)
+            .style('fill', 'steelblue')
+            .attr("class", "topBars");
+        
+        //Update Functions
+        $('#start, #end').click(function() {
+            var numSongsTop = parseInt($('#numSongs1').text());
+            d3.csv('data/loudness.csv', function(data) {
+                var topYear = $('#topCurrent').text();
+
+                var loudData = _.where(data, {Year: topYear});
+                delete loudData[0]["Year"];
+
+
+                var loudValues = _.values(loudData[0]);
+                //Update all rects
+                        loudnessTop.selectAll("rect")
+                                .data(loudValues)
+                                    .transition()
+                                    .duration(2000)
+                                    .attr("y", function(d) { return 200 - ((d/numSongsTop) * 1600);})
+                                    .attr("height", function(d) { return (d/numSongsTop) * 1600;});
+            });
+        });
+        
+    });
+    
+    //Plot the tempo values for top
+    d3.csv('data/tempo.csv', function(data) {
+        
+        var tempoData = _.where(data, {Year: topYear});
+        delete tempoData[0]["Year"];
+        
+        var tempoValues = _.values(tempoData[0]);
+        
+        tempoTop.selectAll('bars').data(tempoValues)
+            .enter()
+            .append('rect')
+            .attr("x", function(d, i) { return 5.75 * i;})
+            .attr("y", function(d) { return 200 - ((d/numSongsTop) * 1600);})
+            .attr("height", function(d) { return (d/numSongsTop) * 1600;})
+            .attr("width", 5.5)
+            .style('fill', 'steelblue')
+            .attr("class", "topBars");
+        
+        //Update Functions
+        $('#start, #end').click(function() {
+            var numSongsTop = parseInt($('#numSongs1').text());
+            d3.csv('data/tempo.csv', function(data) {
+                var topYear = $('#topCurrent').text();
+
+                var tempoData = _.where(data, {Year: topYear});
+                delete tempoData[0]["Year"];
+
+
+                var tempoValues = _.values(tempoData[0]);
+                //Update all rects
+                        tempoTop.selectAll("rect")
+                                .data(tempoValues)
+                                    .transition()
+                                    .duration(2000)
+                                    .attr("y", function(d) { return 200 - ((d/numSongsTop) * 1600);})
+                                    .attr("height", function(d) { return (d/numSongsTop) * 1600;});
+            });
+        });
+        
+    });
+    
+    //Plot the hotness values for top
+    d3.csv('data/hotness.csv', function(data) {
+        
+        var hotnessData = _.where(data, {Year: topYear});
+        delete hotnessData[0]["Year"];
+        
+        
+        var hotnessValues = _.values(hotnessData[0]);
+        
+        hotnessTop.selectAll('bars').data(hotnessValues)
+            .enter()
+            .append('rect')
+            .attr("x", function(d, i) { return 5.75 * i;})
+            .attr("y", function(d) { return 200 - ((d/numSongsTop) * 1600);})
+            .attr("height", function(d) { return (d/numSongsTop) * 1600;})
+            .attr("width", 5.5)
+            .style('fill', 'steelblue')
+            .attr("class", "topBars");
+        
+        //Update Functions
+        $('#start, #end').click(function() {
+            var numSongsTop = parseInt($('#numSongs1').text());
+            d3.csv('data/hotness.csv', function(data) {
+                var topYear = $('#topCurrent').text();
+
+                var hotnessData = _.where(data, {Year: topYear});
+                delete hotnessData[0]["Year"];
+
+
+                var hotnessValues = _.values(hotnessData[0]);
+                //Update all rects
+                        hotnessTop.selectAll("rect")
+                                .data(hotnessValues)
+                                    .transition()
+                                    .duration(2000)
+                                    .attr("y", function(d) { return 200 - ((d/numSongsTop) * 1600);})
+                                    .attr("height", function(d) { return (d/numSongsTop) * 1600;});
+            });
+        });
+        
+    });
+    
+    
+
+    
+    
+    
+
+    
+};
+
+
+wavePlot();
+
+        
+var waveUpdate = function(){
+    var topYear = $('#topCurrent').text();
+    
+    var numSongsTop = parseInt($('#numSongs1').text());
+    
+    d3.csv('data/duration.csv', function(data) {
+        var durData = _.where(data, {Year: topYear});
+        delete durData[0]["Year"];
+        
+        var durValues = _.values(durData[0]);
+        var durationTop = d3.select('#durationTop');
+        
+        //Update all rects
+        durationTop.selectAll("rect")
+                .data(durValues)
+                    .transition()
+                    .duration(200)
+                    .attr("y", function(d) { return 200 - ((d/numSongsTop) * 1600);})
+                    .attr("height", function(d) { return (d/numSongsTop) * 1600;});
+        
+        
+    });
+    
+    d3.csv('data/loudness.csv', function(data) {
+        var loudData = _.where(data, {Year: topYear});
+        delete loudData[0]["Year"];
+        
+        var loudValues = _.values(loudData[0]);
+        var loudTop = d3.select('#loudnessTop');
+        
+        //Update all rects
+        loudTop.selectAll("rect")
+                .data(loudValues)
+                    .transition()
+                    .duration(200)
+                    .attr("y", function(d) { return 200 - ((d/numSongsTop) * 1600);})
+                    .attr("height", function(d) { return (d/numSongsTop) * 1600;});
+        
+        
+    });
+    
+    d3.csv('data/tempo.csv', function(data) {
+        var tempoData = _.where(data, {Year: topYear});
+        delete tempoData[0]["Year"];
+        
+        var tempoValues = _.values(tempoData[0]);
+        var tempoTop = d3.select('#tempoTop');
+        
+        //Update all rects
+        tempoTop.selectAll("rect")
+                .data(tempoValues)
+                    .transition()
+                    .duration(200)
+                    .attr("y", function(d) { return 200 - ((d/numSongsTop) * 1600);})
+                    .attr("height", function(d) { return (d/numSongsTop) * 1600;});
+        
+        
+    });
+    
+    d3.csv('data/hotness.csv', function(data) {
+        var hotnessData = _.where(data, {Year: topYear});
+        delete hotnessData[0]["Year"];
+        
+        var hotnessValues = _.values(hotnessData[0]);
+        var hotnessTop = d3.select('#hotnessTop');
+        
+        //Update all rects
+        hotnessTop.selectAll("rect")
+                .data(hotnessValues)
+                    .transition()
+                    .duration(200)
+                    .attr("y", function(d) { return 200 - ((d/numSongsTop) * 1600);})
+                    .attr("height", function(d) { return (d/numSongsTop) * 1600;});
+        
+        
+    });
+    
+};
 
 
 
 
-    waveSection('Innovation', .2, 1);
-    waveSection('Education', .2, 2);
-    waveSection('KEI', .2, 3);
-    waveSection('ICT', .2, 4);
-    waveSection('ICT', .2, 7);
-    waveSection('KI', .2, 6);
-    waveSection('Economic', .2, 7);
-    waveSection('Education', .2, 7);
-
-
-
-
-
-});
 
 
 

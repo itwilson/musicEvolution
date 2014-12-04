@@ -1,87 +1,90 @@
-infovisApp.controller('metaController', function($scope) {
-    $scope.message = 'On the Meta Page';
-
-    d3.csv('data2.csv', function(data) {
-        data.forEach(function(d){ d['Innovation'] = +d['Innovation']; }); 
-
-        //Set number of songs
-        var numSongs = data.length;
-        $('#numSongs').text(numSongs + " songs");
-
-
-        //Pluck
-        var dataArray = _.pluck(data, 'Innovation');
-        var dataArray2 = _.pluck(data, 'ICT');
-        var dataArray3 = _.pluck(data, 'KEI');
-
-        //Average
-        $('#average').text(d3.mean(dataArray));
-
-        //Min
-        var dataMin = d3.min(dataArray);
-        var dataMinSongIs = (_.findWhere(data, {Innovation: dataMin})).Country;
-        $('#shortSong').text(dataMin + "-" + dataMinSongIs);
-
-        //Min
-        var dataMax = d3.max(dataArray);
-        var dataMaxSongIs = (_.findWhere(data, {Innovation: dataMax})).Country;
-        $('#longSong').text(dataMax + "-" + dataMaxSongIs);
-
-        //StDev
-        // Require simple statistics
-        var stDev = ss.standard_deviation(dataArray)
-        $('#stDev').text(stDev);
-
-        ///////////////////////////////////
-        //PlotWav//////////////////////////
-        ///////////////////////////////////
-
-
-
-        var waveSection = function(metric, chunk, index) {
-            //Create array of values for metric from argument
-            var dataArray = _.pluck(data, metric);
-
-            //Create an array of objects for how many values are in each chunk for bars
-            var sortData = _.countBy(dataArray, function(num) {
-                for (i = 1; i < 11;) {
-                    if (num < i) {
-                        return i - 1;
-                        break;
-                    };
-                    i += chunk;
+///////////////////////////////
+//Function to get Genre Changes
+///////////////////////////////
+$('document').ready(function() {
+            $('#genre1').on('change', function(){
+                var genreSelect1;
+                genreSelect1 = $( "#genre1 option:selected" ).text();
+                var select = genreSelect1;
+                if(select = "Rock") {
+                    $('.topBars').css("color", "steelblue");
+                    $('#genre1').css("background-color", "steelblue");
+                    $('#genre1').css("color", "white");
+                }else if(select = "Pop"){
+                    $('.topBars').css("color", "steelblue");
+                    $('#genre1').css("background-color", "rgb(0, 100, 0)");
                 };
+
             });
 
+            $('#genre2').change(function(){
+                var genreSelect2;
+                genreSelect2 = $("#genre2 option:selected").text();
+                var select = genreSelect2;
+                
+                if(select = "Pop"){
+                    $('.topBars').css("color", "steelblue");
+                    $('#genre2').css("background-color", "rgb(0, 100, 0)");
+                    $('#genre2').css("color", "white");
+                };
+
+            });
+        });    
 
 
+///////////////////////////////
+//Function to get the data
+///////////////////////////////
 
-            //Pluck the values for bars
-            var sortedValues = _.values(sortData);
+var getData = function(displaySelect){
+    d3.csv('data/metaData.csv', function(data) {
 
-
-
-            //Pluck the keys for popover used later
-            var sortedKeys = _.keys(sortData);
-
-           
+        
+        if (displaySelect == 1){
+            thisYear = $('#topCurrent').text();
+        }else if(displaySelect == 2){
+            thisYear = $('#bottomCurrent').text();
         };
+        
+        //Get the year
+        var year = _.where(data, {Year:thisYear});
+        console.log();
+        //Set number of songs
+        $('#numSongs' + displaySelect).text(year[0].Songs);
 
+        //Set Average Length
+        //var lengthArray = _.pluck(year, 'Duration');
+        //convert to integers
+        //for(var i=lengthArray.length; i--;) lengthArray[i] = lengthArray[i]|0;
+        //var lengthMean = (d3.mean(lengthArray)).toFixed(2);
+        //var minutes = Math.floor(lengthMean / 60);
+        //var seconds = Math.floor(lengthMean % 60);
+        //if (seconds < 10){
+        //    seconds = "0" + seconds;
+        //}
+        $('#averageDur' + displaySelect).text(year[0].Duration);
 
+        //Get the Average Loudness
+        //var loudArray = _.sortBy((_.pluck(year, 'Loudness')));
+        //for(var i=loudArray.length; i--;) loudArray[i] = loudArray[i]|0;
+        //var loudMean = (d3.mean(loudArray)).toFixed(2);
+        $('#averageLoud' + displaySelect).text(year[0].Loudness + " dB");
 
+        //Get the Average Temp
+        //var tempoArray = _.sortBy((_.pluck(year, 'Tempo')));
+        //for(var i=tempoArray.length; i--;) tempoArray[i] = tempoArray[i]|0;
+        //var tempoMean = (d3.mean(tempoArray)).toFixed(2);
+        $('#averageTempo' + displaySelect).text(year[0].Tempo + " BPM");
 
-        waveSection('Innovation', .2, 1);
-        waveSection('Education', .2, 2);
-        waveSection('KEI', .2, 3);
-        waveSection('ICT', .2, 4);
-        waveSection('Business', .2, 5);
-        waveSection('KI', .2, 6);
-        waveSection('Economic', .2, 7);
-        waveSection('Education', .2, 7);
+        //Get the Average Hotness
+        //var hotnessArray = _.sortBy((_.pluck(year, 'Hotness')));
+        //for(var i=hotnessArray.length; i--;) hotnessArray[i] = hotnessArray[i] / 1;
 
-
-
-
+        //var hotnessMean = (d3.mean(hotnessArray)).toFixed(2);
+        $('#averageHotness' + displaySelect).text(year[0].Hotness);
 
     });
-});
+};
+
+getData(1);
+getData(2);
