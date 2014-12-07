@@ -38,19 +38,20 @@ $('document').ready(function() {
 
 var getData = function(displaySelect){
     d3.csv('data/metaData.csv', function(data) {
-
+      
         
-        if (displaySelect == 1){
-            thisYear = $('#topCurrent').text();
-        }else if(displaySelect == 2){
-            thisYear = $('#bottomCurrent').text();
-        };
+        
+            thisYearTop = $('#topCurrent').text();
+            thisYearBottom = $('#bottomCurrent').text();
+        
         
         //Get the year
-        var year = _.where(data, {Year:thisYear});
-        console.log();
+        var yearTop = _.where(data, {Year:thisYearTop});
+        var yearBottom = _.where(data, {Year:thisYearBottom});
+
         //Set number of songs
-        $('#numSongs' + displaySelect).text(year[0].Songs);
+        $('#numSongs1').text(yearTop[0].Songs);
+        $('#numSongs2').text(yearBottom[0].Songs);
 
         //Set Average Length
         //var lengthArray = _.pluck(year, 'Duration');
@@ -62,29 +63,31 @@ var getData = function(displaySelect){
         //if (seconds < 10){
         //    seconds = "0" + seconds;
         //}
-        $('#averageDur' + displaySelect).text(year[0].Duration);
-
+        $('#averageDur1').text(yearTop[0].Duration);
+        $('#averageDur2').text(yearBottom[0].Duration);
         //Get the Average Loudness
         //var loudArray = _.sortBy((_.pluck(year, 'Loudness')));
         //for(var i=loudArray.length; i--;) loudArray[i] = loudArray[i]|0;
         //var loudMean = (d3.mean(loudArray)).toFixed(2);
-        $('#averageLoud' + displaySelect).text(year[0].Loudness + " dB");
+        $('#averageLoud1').text(yearTop[0].Loudness + " dB");
+        $('#averageLoud2').text(yearBottom[0].Loudness + " dB");
 
         //Get the Average Temp
         //var tempoArray = _.sortBy((_.pluck(year, 'Tempo')));
         //for(var i=tempoArray.length; i--;) tempoArray[i] = tempoArray[i]|0;
         //var tempoMean = (d3.mean(tempoArray)).toFixed(2);
-        $('#averageTempo' + displaySelect).text(year[0].Tempo + " BPM");
-
+        $('#averageTempo1').text(yearTop[0].Tempo + " BPM");
+        $('#averageTempo2').text(yearBottom[0].Tempo + " BPM");
         //Get the Average Hotness
         //var hotnessArray = _.sortBy((_.pluck(year, 'Hotness')));
         //for(var i=hotnessArray.length; i--;) hotnessArray[i] = hotnessArray[i] / 1;
 
         //var hotnessMean = (d3.mean(hotnessArray)).toFixed(2);
-        $('#averageHotness' + displaySelect).text(year[0].Hotness);
+        $('#averageHotness1').text(yearTop[0].Hotness);
+        $('#averageHotness2').text(yearTop[0].Hotness);
 
     });
 };
 
-getData(1);
-getData(2);
+getData();
+

@@ -1,9 +1,6 @@
 {
  "name": "flare",
  "children": [
-  {
-   "name": "analytics",
-   "children": [
     {
     "name": "1960",
     "children": [
@@ -2446,7 +2443,4 @@
     }
 
 ]
-}
-]
-  
 }

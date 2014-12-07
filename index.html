@@ -62,20 +62,22 @@
                     <option>Location</option>
                     <option>Lyrics</option>
                     <option>Subgenres</option>
+                    <option>OverTime</option>
                 </select>
                 <select id="viewSelect2">
                     <option>Waveform</option>
                     <option >Location</option>
                     <option>Lyrics</option>
-                    <option selected>Subgenres</option>
+                    <option>Subgenres</option>
+                    <option selected>OverTime</option>
                 </select>
             </div>
             <div id="views" ng-controller="viewController">
                 <div class="infoView"id="view1">
-                    <div ng-include src="'partial/waveform.html'"></div>
+                    <div ng-include src="'partial/location.html'"></div>
                 </div>
            <div class="infoView" id="view2">
-                    <div ng-include src="'partial/subgenres.html'"></div>
+                    <div ng-include src="'partial/overTime.html'"></div>
                 </div>
             </div>
             
@@ -165,9 +167,8 @@
     <script src="js/app.js"></script>    
         
     <!--Controllers-->
-    <script src="js/mainController.js"></script>
-    <script src="js/locationController.js"></script>  
-    <script src="js/lyricsController.js"></script>
+    <script src="js/mainController.js"></script> 
+    
 
           
    

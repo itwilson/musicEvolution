@@ -33,6 +33,7 @@
                         });
                         var date = Math.floor((valRight / 10) + 1960);
                         $('#topEnd').text(date);
+                        
                     }
     });
     $('#bottomLeftBound').draggable({ 
@@ -50,6 +51,7 @@
                         
                         var date = Math.floor((valLeft / 10) + 1960);
                         $('#bottomStart').text(date);
+                        
                     }
     });
     $('#bottomRightBound').draggable({ 
@@ -74,8 +76,21 @@
                                         var newPosition = $('#playCursorTop').css('left').replace(/px/g,'');
                                         var newValue = Math.floor((parseFloat(newPosition) / 10) + 1960);
                                         $('#topCurrent').text(newValue);  
-                                        getData(1);
-                                        waveUpdate()
+                                        getData();
+                                        if (typeof waveUpdate == 'function') { 
+                                            
+                                          waveUpdate(); 
+                                        };
+                                        
+                                        if (typeof treemapPlot == 'function') { 
+                                          treemapPlot(); 
+                                        };
+                                        if (typeof overTimeUpdate == 'function') {
+                                        overTimeUpdate();  
+                                        };
+                                        if (typeof mapDotsUpdate == 'function') {
+                                        mapDotsUpdate();  
+                                        };
                                     }
                                   });
     $('#playCursorBottom').draggable({ containment: "#playbar", 
@@ -84,8 +99,22 @@
                                         var newPosition = $('#playCursorBottom').css('left').replace(/px/g,'');
                                         var newValue = Math.floor((parseFloat(newPosition) / 10) + 1960);
                                         $('#bottomCurrent').text(newValue);  
-                                        getData(2);
-                                        waveUpdata();
+                                        getData();
+                                        if (typeof waveUpdate == 'function') { 
+                                            
+                                          waveUpdate(); 
+                                        };
+                                        if (typeof treemapPlot == 'function') { 
+                                          treemapPlot(); 
+                                        };
+                                        
+                                        if (typeof overTimeUpdate == 'function') {
+                                        overTimeUpdate();  
+                                        };
+                                        
+                                        if (typeof mapDotsUpdate == 'function') {
+                                        mapDotsUpdate();  
+                                        };
                                     }
                                   });
     
@@ -122,7 +151,7 @@
             left: endPositionTop +'px',
         }, {
             
-            duration: playSpeed * 1000,
+            duration: playSpeed * 2000,
             step: function() {
                 currentPositionTop = parseFloat($('#playCursorTop').css('left')) + 50;
                 var newPositionTop = Math.floor((startPositionTop / 50));
@@ -130,8 +159,23 @@
                 var newValue = Math.floor((parseFloat(newPosition) / 10) + 1960);
                 $('#topCurrent').text(newValue); 
                 $('#stageNum').text(newPositionTop);
-                getData(1);
-                waveUpdate();
+                getData();
+                if (typeof waveUpdate == 'function') { 
+                                            
+                                          waveUpdate(); 
+                                        };
+                if (typeof waveUpdate == 'function') { 
+                                            
+                                          waveUpdate(); 
+                                        };
+                if (typeof mapDotsUpdate == 'function') {
+                                        mapDotsUpdate();  
+                };
+                
+                if (typeof overTimeUpdate == 'function') {
+                                        overTimeUpdate();  
+                };
+                
             },
             easing:'linear'
             }
@@ -147,7 +191,7 @@
             left: endPositionBottom +'px',
         }, {
             
-            duration: playSpeed * 1000,
+            duration: playSpeed * 2000,
             step: function() {
                 startPositionBottom = parseFloat($('#playCursorBottom').css('left')) + 50;
                 var newPositionBottom = Math.floor((startPositionBottom / 50));
@@ -155,7 +199,22 @@
                 var newValue = Math.floor((parseFloat(newPosition) / 10) + 1960);
                 $('#bottomCurrent').text(newValue); 
                 $('#stageNum').text(newPositionBottom);
-                getData(2);
+                getData();
+                if (typeof waveUpdate == 'function') { 
+                                            
+                                          waveUpdate(); 
+                                        };
+                if (typeof treemapPlot == 'function') { 
+                                            
+                                          treemapPlot(); 
+                                        };
+                if (typeof mapDotsUpdate == 'function') {
+                                        mapDotsUpdate();  
+                };
+                
+                if (typeof overTimeUpdate == 'function') {
+                                        overTimeUpdate();  
+                };
             
             },
             easing:'linear'
@@ -178,6 +237,22 @@
         var newPositionBottom = $('#playCursorBottom').css('left').replace(/px/g,'');
         var newValueBottom = Math.floor((parseFloat(newPositionBottom) / 10) + 1960);
         $('#bottomCurrent').text(newValueBottom); 
+        getData();
+        if (typeof waveUpdate == 'function') { 
+                                            
+                                          waveUpdate(); 
+                                        };
+        
+        if (typeof treemapPlot == 'function') { 
+                                            
+                                          treemapPlot(); 
+                                        };
+        if (typeof mapDotsUpdate == 'function') {
+                                        mapDotsUpdate();  
+                };
+        if (typeof overTimeUpdate == 'function') {
+                                        overTimeUpdate();  
+                };
         
     });
 
@@ -193,6 +268,21 @@
         var newPositionBottom = $('#playCursorBottom').css('left').replace(/px/g,'');
         var newValueBottom = Math.floor((parseFloat(newPositionBottom) / 10) + 1960);
         $('#bottomCurrent').text(newValueBottom); 
+        getData();
+        if (typeof waveUpdate == 'function') { 
+                                            
+                                          waveUpdate(); 
+                                        };
+        if (typeof treemapPlot == 'function') { 
+                                          
+                                          treemapPlot(); 
+                                        };
+        if (typeof mapDotsUpdate == 'function') {
+                                        mapDotsUpdate();  
+                };
+        if (typeof overTimeUpdate == 'function') {
+                                        overTimeUpdate();  
+                };
         
     });
 
@@ -257,7 +347,4 @@
     });
 
 
-    var updateWave = function(){
-        
-        
-    };
+    

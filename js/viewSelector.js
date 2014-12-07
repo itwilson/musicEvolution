@@ -24,6 +24,9 @@ infovisApp.controller('viewController', function($scope) {
         }else if (valSelected=="Subgenres"){
             viewSelect.load("partial/subgenres.html");
             console.log('sent ' + valSelected);  
+        }else if (valSelected=="OverTime"){
+            viewSelect.load("partial/overTime.html");
+            console.log('sent ' + valSelected);  
         };
     });
 
@@ -41,6 +44,9 @@ infovisApp.controller('viewController', function($scope) {
             console.log('sent ' + valSelected);  
         }else if (valSelected=="Subgenres"){
             viewSelect.load("partial/subgenres.html");
+            console.log('sent ' + valSelected);  
+        }else if (valSelected=="OverTime"){
+            viewSelect.load("partial/overTime.html");
             console.log('sent ' + valSelected);  
         };
     });

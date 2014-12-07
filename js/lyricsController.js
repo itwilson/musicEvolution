@@ -1,26 +1,29 @@
-var words1 = "I've got another confession to make I'm your fool Everyone\'s got their chains to break Holdin\' you Were you born to resist or be abused? Is someone getting the best, the best, the best, the best of you? Is someone getting the best, the best, the best, the best of you? Are you gone and onto someone new? I needed somewhere to hang my head Without your noose You gave me something that I didn't have But had no use I was too weak to give in Too strong to lose My heart is under arrest again But I break loose My head is giving me life or death But I can\'t choose I swear I\'ll never give in I refuse Is someone getting the best, the best, the best, the best of you? Is someone getting the best, the best, the best, the best of you? Has someone taken your faith? Its real, the pain you feel You trust, you must Confess Is someone getting the best, the best, the best, the best of you? Oh... Oh... Oh... Oh... Oh... Has someone taken your faith? Its real, the pain you feel The life, the love you\'d die to heal The hope that starts the broken hearts You trust, you must Confess Is someone getting the best, the best, the best, the best of you? Is someone getting the best, the best, the best, the best of you? I\'ve got another confession my friend I\'m no fool I\'m getting tired of starting again Somewhere newWere you born to resist or be abused? I swear I'll never give in I refuse Is someone getting the best, the best, the best, the best of you? Is someone getting the best, the best, the best, the best of you? Has someone taken your faith? Its real, the pain you feel You trust, you must Confess Is someone getting the best, the best, the best, the best of you? Oh...";
 
-var stopWords = ["i", "I", "in", "to", "the", "Is"];
 
-var wordsUnedited = words1.split(' ');
+var dataTable = $('#dataTable');
 
-var edititedWords = function(){
-                        for (i in stopWords) {
-                            for (p in stopWords){
-                                if (wordsUnedited[i] == stopWords[p]){
-                                   wordsUnedited.splice(i , 1); 
-                                };
-                            };
-                        };
-                        
+d3.csv("data/lyrics.csv", function(error, data){
+    var thisYear = _.where(data, {Year: "2000"});
+    var stringWords = (_.pluck(thisYear, "Lyrics"));
+    var words = stringWords[0];
+    console.log(words);
+    var str=words;
+    var obj=eval("("+str+")");
+    console.log(obj);
+
     
-};
+    
+});
 
-edititedWords();
+
+
+
+
                     
 
 
 
+/*
 
 
  
@@ -87,4 +90,5 @@ edititedWords();
             })
             .text(function(d) { return d.text; });
       };
+*/
 
