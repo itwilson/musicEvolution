@@ -1,3 +1,6 @@
+var previousYearTop = 0;
+var previousYearBottom = 0;
+
 //Stepper
     $('#topLeftBound').draggable({ 
                     containment: "parent", 
@@ -18,6 +21,7 @@
                         var date = Math.floor((valLeft / 10) + 1960);
                         $('#topStart').text(date);
                     }
+    
     });
     $('#topRightBound').draggable({ 
                     containment: "parent", 
@@ -75,45 +79,65 @@
                                     drag: function( event, ui ) {
                                         var newPosition = $('#playCursorTop').css('left').replace(/px/g,'');
                                         var newValue = Math.floor((parseFloat(newPosition) / 10) + 1960);
-                                        $('#topCurrent').text(newValue);  
-                                        getData();
-                                        if (typeof waveUpdate == 'function') { 
+                                         
+                                        if (newValue == previousYearTop) {
+                                            //Dont Update
+                                        }else{
                                             
-                                          waveUpdate(); 
+                                            $('#topCurrent').text(newValue); 
+                                            previousYearTop = newValue;
+                                            getData();
+                                            if (typeof waveUpdate == 'function') { 
+                                              waveUpdate(); 
+                                            };
+                                            if (typeof treemapPlot == 'function') { 
+                                              treemapPlot(); 
+                                            };
+                                            if (typeof overTimeUpdate == 'function') {
+                                            overTimeUpdate();  
+                                            };
+                                            if (typeof mapDotsUpdate == 'function') {
+                                            mapDotsUpdate();  
+                                            };
+                                            if (typeof lyricsUpdate == 'function') {
+                                            lyricsUpdate();  
+                                            };
                                         };
-                                        
-                                        if (typeof treemapPlot == 'function') { 
-                                          treemapPlot(); 
-                                        };
-                                        if (typeof overTimeUpdate == 'function') {
-                                        overTimeUpdate();  
-                                        };
-                                        if (typeof mapDotsUpdate == 'function') {
-                                        mapDotsUpdate();  
-                                        };
+                                    
                                     }
                                   });
+
     $('#playCursorBottom').draggable({ containment: "#playbar", 
                                     axis: "x",
                                     drag: function( event, ui ) {
                                         var newPosition = $('#playCursorBottom').css('left').replace(/px/g,'');
                                         var newValue = Math.floor((parseFloat(newPosition) / 10) + 1960);
-                                        $('#bottomCurrent').text(newValue);  
-                                        getData();
-                                        if (typeof waveUpdate == 'function') { 
-                                            
-                                          waveUpdate(); 
-                                        };
-                                        if (typeof treemapPlot == 'function') { 
-                                          treemapPlot(); 
-                                        };
                                         
-                                        if (typeof overTimeUpdate == 'function') {
-                                        overTimeUpdate();  
-                                        };
-                                        
-                                        if (typeof mapDotsUpdate == 'function') {
-                                        mapDotsUpdate();  
+                                        if(newValue == previousYearBottom){
+                                            //Don't update
+                                        }else{
+                                            previousYearBottom = newValue;
+                                            $('#bottomCurrent').text(newValue);  
+                                            getData();
+                                            if (typeof waveUpdate == 'function') {  
+                                              waveUpdate(); 
+                                            };
+
+                                            if (typeof treemapPlot == 'function') { 
+                                              treemapPlot(); 
+                                            };
+
+                                            if (typeof overTimeUpdate == 'function') {
+                                            overTimeUpdate();  
+                                            };
+
+                                            if (typeof mapDotsUpdate == 'function') {
+                                            mapDotsUpdate();  
+                                            };
+
+                                            if (typeof lyricsUpdate == 'function') {
+                                            lyricsUpdate();  
+                                            };
                                         };
                                     }
                                   });
@@ -157,23 +181,33 @@
                 var newPositionTop = Math.floor((startPositionTop / 50));
                 var newPosition = $('#playCursorTop').css('left').replace(/px/g,'');
                 var newValue = Math.floor((parseFloat(newPosition) / 10) + 1960);
-                $('#topCurrent').text(newValue); 
-                $('#stageNum').text(newPositionTop);
-                getData();
-                if (typeof waveUpdate == 'function') { 
-                                            
-                                          waveUpdate(); 
-                                        };
-                if (typeof waveUpdate == 'function') { 
-                                            
-                                          waveUpdate(); 
-                                        };
-                if (typeof mapDotsUpdate == 'function') {
-                                        mapDotsUpdate();  
-                };
                 
-                if (typeof overTimeUpdate == 'function') {
-                                        overTimeUpdate();  
+                if (newValue == previousYearTop) {
+                    //Don't Update
+                }else{
+                    previousYearTop = newValue;
+                    $('#topCurrent').text(newValue); 
+                    $('#stageNum').text(newPositionTop);
+                    getData();
+                    
+                    if (typeof waveUpdate == 'function') { 
+
+                                              waveUpdate(); 
+                                            };
+                    if (typeof waveUpdate == 'function') { 
+
+                                              waveUpdate(); 
+                                            };
+                    if (typeof mapDotsUpdate == 'function') {
+                                            mapDotsUpdate();  
+                    };
+
+                    if (typeof overTimeUpdate == 'function') {
+                                            overTimeUpdate();  
+                    };
+                    if (typeof lyricsUpdate == 'function') {
+                                            lyricsUpdate();  
+                                            };
                 };
                 
             },
@@ -197,25 +231,33 @@
                 var newPositionBottom = Math.floor((startPositionBottom / 50));
                 var newPosition = $('#playCursorBottom').css('left').replace(/px/g,'');
                 var newValue = Math.floor((parseFloat(newPosition) / 10) + 1960);
-                $('#bottomCurrent').text(newValue); 
-                $('#stageNum').text(newPositionBottom);
-                getData();
-                if (typeof waveUpdate == 'function') { 
-                                            
-                                          waveUpdate(); 
-                                        };
-                if (typeof treemapPlot == 'function') { 
-                                            
-                                          treemapPlot(); 
-                                        };
-                if (typeof mapDotsUpdate == 'function') {
-                                        mapDotsUpdate();  
-                };
                 
-                if (typeof overTimeUpdate == 'function') {
-                                        overTimeUpdate();  
+                if (newValue == previousYearBottom){
+                    //Dont Update
+                }else{
+                    previousYearBottom = newValue
+                    $('#bottomCurrent').text(newValue); 
+                    $('#stageNum').text(newPositionBottom);
+                    getData();
+                    if (typeof waveUpdate == 'function') { 
+
+                                              waveUpdate(); 
+                                            };
+                    if (typeof treemapPlot == 'function') { 
+
+                                              treemapPlot(); 
+                                            };
+                    if (typeof mapDotsUpdate == 'function') {
+                                            mapDotsUpdate();  
+                    };
+
+                    if (typeof overTimeUpdate == 'function') {
+                                            overTimeUpdate();  
+                    };
+                    if (typeof lyricsUpdate == 'function') {
+                                            lyricsUpdate();  
+                                            };
                 };
-            
             },
             easing:'linear'
             }
@@ -253,6 +295,9 @@
         if (typeof overTimeUpdate == 'function') {
                                         overTimeUpdate();  
                 };
+        if (typeof lyricsUpdate == 'function') {
+                                        lyricsUpdate();  
+                                        };
         
     });
 
@@ -283,27 +328,84 @@
         if (typeof overTimeUpdate == 'function') {
                                         overTimeUpdate();  
                 };
+        if (typeof lyricsUpdate == 'function') {
+                                        lyricsUpdate();  
+                                        };
         
     });
 
     $('#next').click(function() {
-        var currentPosition = $('#playCursor').css('left').replace(/\D/g,'');
-        var newPosition = ((currentPosition / 50) * 50) + 50;
-        var currentStage = Math.floor(newPosition/50)+1
-        if (currentPosition < 475) {
-            $('#playCursor').css('left', newPosition);
-            $('#stageNum').text(Math.floor(newPosition/50)+1);
+        var newValueTop = parseInt($('#topCurrent').text());
+        var newValueBottom = parseInt($('#bottomCurrent').text());
+        
+        if (newValueTop < 2014){
+            newValueTop +=1;
+            $('#topCurrent').text(newValueTop);
+            $("#playCursorTop").css('left', (newValueTop - 1960) * 10);
         };
+        
+        if (newValueBottom < 2014){
+            newValueBottom +=1;
+            $('#bottomCurrent').text(newValueBottom);
+            $('#playCursorBottom').css('left', (newValueBottom - 1960) * 10);
+        };
+        
+        getData();
+        
+        if (typeof waveUpdate == 'function') { 
+                                            
+                                          waveUpdate(); 
+                                        };
+        if (typeof treemapPlot == 'function') { 
+                                          
+                                          treemapPlot(); 
+                                        };
+        if (typeof mapDotsUpdate == 'function') {
+                                        mapDotsUpdate();  
+                };
+        if (typeof overTimeUpdate == 'function') {
+                                        overTimeUpdate();  
+                };
+        if (typeof lyricsUpdate == 'function') {
+                                        lyricsUpdate();  
+                                        };
     });
 
     $('#back').click(function() {
-        var currentPosition = $('#playCursor').css('left').replace(/\D/g,'');
-        var newPosition = ((currentPosition / 50) * 50) - 50;
-        var currentStage = Math.floor(newPosition/50) + 1;
-        if (currentPosition > 25) {
-            $('#playCursor').css('left', newPosition);
-            $('#stageNum').text(Math.floor(newPosition/50)+1);
+        var newValueTop = parseInt($('#topCurrent').text());
+        var newValueBottom = parseInt($('#bottomCurrent').text());
+        
+        if (newValueTop > 1960){
+            newValueTop -=1;
+            $('#topCurrent').text(newValueTop);
+            $("#playCursorTop").css('left', (newValueTop - 1960) * 10);
         };
+        
+        if (newValueBottom > 1960){
+            newValueBottom -=1;
+            $('#bottomCurrent').text(newValueBottom);
+            $('#playCursorBottom').css('left', (newValueBottom - 1960) * 10);
+        };
+        
+        getData();
+        
+        if (typeof waveUpdate == 'function') { 
+                                            
+                                          waveUpdate(); 
+                                        };
+        if (typeof treemapPlot == 'function') { 
+                                          
+                                          treemapPlot(); 
+                                        };
+        if (typeof mapDotsUpdate == 'function') {
+                                        mapDotsUpdate();  
+                };
+        if (typeof overTimeUpdate == 'function') {
+                                        overTimeUpdate();  
+                };
+        if (typeof lyricsUpdate == 'function') {
+                                        lyricsUpdate();  
+                                        };
     });
 
     //Stage identify

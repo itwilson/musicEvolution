@@ -166,42 +166,79 @@ d3.csv('data/metaData.csv', function(error, data) {
                             .attr("fill", "none");
     
     
-    //Play Lines
-    var durTime = durationCanvas.append("line")
+    //Play Lines Top
+    var durTimeTop = durationCanvas.append("line")
                             .attr("x1", 0)
                             .attr("x2", 0)
                             .attr("y1", 0)
                             .attr("y2", 200)
                             .attr("stroke", "steelblue")
                             .attr("stroke-width", "3px")
-                            .attr("id", "durTime");
+                            .attr("id", "durTimeTop");
     
-    var loudTime = loudnessCanvas.append("line")
+    var loudTimeTop = loudnessCanvas.append("line")
                             .attr("x1", 0)
                             .attr("x2", 0)
                             .attr("y1", 0)
                             .attr("y2", 200)
                             .attr("stroke", "steelblue")
                             .attr("stroke-width", "3px")
-                            .attr("id", "loudTime");
+                            .attr("id", "loudTimeTop");
     
-    var tempoTime = tempoCanvas.append("line")
+    var tempoTimeTop = tempoCanvas.append("line")
                             .attr("x1", 0)
                             .attr("x2", 0)
                             .attr("y1", 0)
                             .attr("y2", 200)
                             .attr("stroke", "steelblue")
                             .attr("stroke-width", "3px")
-                            .attr("id", "tempoTime");
+                            .attr("id", "tempoTimeTop");
     
-    var hotTime = hotnessCanvas.append("line")
+    var hotTimeTop = hotnessCanvas.append("line")
                             .attr("x1", 0)
                             .attr("x2", 0)
                             .attr("y1", 0)
                             .attr("y2", 200)
                             .attr("stroke", "steelblue")
                             .attr("stroke-width", "3px")
-                            .attr("id", "hotTime");
+                            .attr("id", "hotTimeTop");
+    
+    //Play Lines Bottom
+    var durTimeBottom = durationCanvas.append("line")
+                            .attr("x1", 0)
+                            .attr("x2", 0)
+                            .attr("y1", 0)
+                            .attr("y2", 200)
+                            .attr("stroke", "#1B5C1B")
+                            .attr("stroke-width", "3px")
+                            .attr("id", "durTimeBottom");
+    
+    var loudTimeBottom = loudnessCanvas.append("line")
+                            .attr("x1", 0)
+                            .attr("x2", 0)
+                            .attr("y1", 0)
+                            .attr("y2", 200)
+                            .attr("stroke", "#1B5C1B")
+                            .attr("stroke-width", "3px")
+                            .attr("id", "loudTimeBottom");
+    
+    var tempoTimeBottom = tempoCanvas.append("line")
+                            .attr("x1", 0)
+                            .attr("x2", 0)
+                            .attr("y1", 0)
+                            .attr("y2", 200)
+                            .attr("stroke", "#1B5C1B")
+                            .attr("stroke-width", "3px")
+                            .attr("id", "tempoTimeBottom");
+    
+    var hotTimeBottom = hotnessCanvas.append("line")
+                            .attr("x1", 0)
+                            .attr("x2", 0)
+                            .attr("y1", 0)
+                            .attr("y2", 200)
+                            .attr("stroke", "#1B5C1B")
+                            .attr("stroke-width", "3px")
+                            .attr("id", "hotTimeBottom");
 
 });
 
@@ -210,33 +247,57 @@ var overTimeUpdate = function() {
     var bottomCurrent = $('#bottomCurrent').text();
     
     var topTime = ((parseInt(topCurrent)) - 1960) * 5; 
+    var bottomTime = ((parseInt(bottomCurrent)) - 1960) * 5;
     
     //SVG's are 300 wide
-    d3.select("#durTime")
+    d3.select("#durTimeTop")
             .transition()
             .duration(150)
             .attr("x1", topTime)
             .attr("x2", topTime);
     
-    d3.select("#loudTime")
+    d3.select("#loudTimeTop")
             .transition()
             .duration(150)
             .attr("x1", topTime)
             .attr("x2", topTime);
     
-    console.log($("#tempoTime"));
-    
-    d3.selectAll("#tempoTime")
+    d3.selectAll("#tempoTimeTop")
             .transition()
             .duration(150)
             .attr("x1", topTime)
             .attr("x2", topTime);
     
-    d3.select("#hotTime")
+    d3.select("#hotTimeTop")
             .transition()
             .duration(150)
             .attr("x1", topTime)
             .attr("x2", topTime);
+    
+    //SVG's are 300 wide
+    d3.select("#durTimeBottom")
+            .transition()
+            .duration(150)
+            .attr("x1", bottomTime)
+            .attr("x2", bottomTime);
+    
+    d3.select("#loudTimeBottom")
+            .transition()
+            .duration(150)
+            .attr("x1", bottomTime)
+            .attr("x2", bottomTime);
+    
+    d3.selectAll("#tempoTimeBottom")
+            .transition()
+            .duration(150)
+            .attr("x1", bottomTime)
+            .attr("x2", bottomTime);
+    
+    d3.select("#hotTimeBottom")
+            .transition()
+            .duration(150)
+            .attr("x1", bottomTime)
+            .attr("x2", bottomTime);
 };
 
 overTimeUpdate();

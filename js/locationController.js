@@ -497,7 +497,8 @@ var mapDotsUpdate = function() {
     //Get this year
     var topYear = $('#topCurrent').text();
     var bottomYear = $('#bottomCurrent').text();
-        
+
+    
     d3.csv("data/locationSorted.csv", function(error, data){
     
         var topYearData = (_.where(data, {Year: topYear}))[0];
@@ -620,121 +621,120 @@ var mapDotsUpdate = function() {
                         .duration(200)
                         .attr("r", (250 * (bottomYearData["Western Europe"] / numSongsBottom)));
         
-//////Blue Parties
-        
-        //Asia Dot
-        d3.select("#asiaDotGreen")
-                    .transition()
-                    .duration(200)
-                    .attr("r", (250 * (topYearData.Asia / numSongsTop)));
-                  
-        //Canada Dot
-        d3.select("#canadaDot")
+//////Blue Parties    
+            //Asia Dot
+            d3.select("#asiaDotGreen")
                         .transition()
                         .duration(200)
-                        .attr("r", (250 * (topYearData.Canada / numSongsTop)));
-        
-        //Caribbean Dot
-        d3.select("#caribbeanDot")
-                        .transition()
-                        .duration(200)
-                        .attr("r", (250 * (topYearData.Caribbean / numSongsTop)));
-        
-        //Central Asia Dot
-        d3.select("#centralAsiaDot")
-                        .transition()
-                        .duration(200)
-                        .attr("r", (250 * (topYearData["Central Asia"] / numSongsTop)));
-        
-        //Eastern Europe Dot
-        d3.select("#easternEuropeDot")
-                        .transition()
-                        .duration(200)
-                        .attr("r", (250 * (topYearData["Eastern Europe"] / numSongsTop)));
-        
-        //Mediterranean Europe Dot
-        d3.select("#mediterraneanDot")
-                        .transition()
-                        .duration(200)
-                        .attr("r", (250 * (topYearData.Mediterranean / numSongsTop)));
-        
-        //Mexico Dot
-        d3.select("#mexicoDot")
-                        .transition()
-                        .duration(200)
-                        .attr("r", (250 * (topYearData.Mexico / numSongsTop)));
-        
-        //Middle East Dot
-        d3.select("#middleEastDot")
-                        .transition()
-                        .duration(200)
-                        .attr("r", (250 * (topYearData["Middle East"] / numSongsTop)));
-        
-        //Midwest Dot
-        d3.select("#midwestDot")
-                        .transition()
-                        .duration(200)
-                        .attr("r", (250 * (topYearData["Midwest"] / numSongsTop)));
-        
-        //North East Dot
-        d3.select("#northEastDot")
-                        .transition()
-                        .duration(200)
-                        .attr("r", (250 * (topYearData["North East"] / numSongsTop)));
-        
-        //Oceania Dot
-        d3.select("#oceaniaDot")
-                        .transition()
-                        .duration(200)
-                        .attr("r", (250 * (topYearData["Oceania"] / numSongsTop)));
-        
-        //Scandinavia Dot
-        d3.select("#scandinaviaDot")
-                        .transition()
-                        .duration(200)
-                        .attr("r", (250 * (topYearData["Scandinavia"] / numSongsTop)));
-        
-        //South America Dot
-        d3.select("#southAmericaDot")
-                        .transition()
-                        .duration(200)
-                        .attr("r", (250 * (topYearData["South America"] / numSongsTop)));
-        
-        //South East Dot
-        d3.select("#southEastDot")
-                        .transition()
-                        .duration(200)
-                        .attr("r", (250 * (topYearData["South East"] / numSongsTop)));
-        
-        //South West Dot
-        d3.select("#southWestDot")
-                        .transition()
-                        .duration(200)
-                        .attr("r", (250 * (topYearData["South West"] / numSongsTop)));
-        
-        //Southeast Asia Dot
-        d3.select("#southeastAsiaDot")
-                        .transition()
-                        .duration(200)
-                        .attr("r", (250 * (topYearData["Southeast Asia"] / numSongsTop)));
-        
-        //Southern Africa Dot
-        d3.select("#southernAfricaDot")
-                        .transition()
-                        .duration(200)
-                        .attr("r", (250 * (topYearData["Southern Africa"] / numSongsTop)));
-        
-        //West Dot
-        d3.select("#westDot")
-                        .transition()
-                        .duration(200)
-                        .attr("r", (250 * (topYearData["West"] / numSongsTop)));
-        
-        //Western Europe Dot
-        d3.select("#westernEuropeDot")
-                        .transition()
-                        .duration(200)
-                        .attr("r", (250 * (topYearData["Western Europe"] / numSongsTop)));
+                        .attr("r", (250 * (topYearData.Asia / numSongsTop)));
+
+            //Canada Dot
+            d3.select("#canadaDot")
+                            .transition()
+                            .duration(200)
+                            .attr("r", (250 * (topYearData.Canada / numSongsTop)));
+
+            //Caribbean Dot
+            d3.select("#caribbeanDot")
+                            .transition()
+                            .duration(200)
+                            .attr("r", (250 * (topYearData.Caribbean / numSongsTop)));
+
+            //Central Asia Dot
+            d3.select("#centralAsiaDot")
+                            .transition()
+                            .duration(200)
+                            .attr("r", (250 * (topYearData["Central Asia"] / numSongsTop)));
+
+            //Eastern Europe Dot
+            d3.select("#easternEuropeDot")
+                            .transition()
+                            .duration(200)
+                            .attr("r", (250 * (topYearData["Eastern Europe"] / numSongsTop)));
+
+            //Mediterranean Europe Dot
+            d3.select("#mediterraneanDot")
+                            .transition()
+                            .duration(200)
+                            .attr("r", (250 * (topYearData.Mediterranean / numSongsTop)));
+
+            //Mexico Dot
+            d3.select("#mexicoDot")
+                            .transition()
+                            .duration(200)
+                            .attr("r", (250 * (topYearData.Mexico / numSongsTop)));
+
+            //Middle East Dot
+            d3.select("#middleEastDot")
+                            .transition()
+                            .duration(200)
+                            .attr("r", (250 * (topYearData["Middle East"] / numSongsTop)));
+
+            //Midwest Dot
+            d3.select("#midwestDot")
+                            .transition()
+                            .duration(200)
+                            .attr("r", (250 * (topYearData["Midwest"] / numSongsTop)));
+
+            //North East Dot
+            d3.select("#northEastDot")
+                            .transition()
+                            .duration(200)
+                            .attr("r", (250 * (topYearData["North East"] / numSongsTop)));
+
+            //Oceania Dot
+            d3.select("#oceaniaDot")
+                            .transition()
+                            .duration(200)
+                            .attr("r", (250 * (topYearData["Oceania"] / numSongsTop)));
+
+            //Scandinavia Dot
+            d3.select("#scandinaviaDot")
+                            .transition()
+                            .duration(200)
+                            .attr("r", (250 * (topYearData["Scandinavia"] / numSongsTop)));
+
+            //South America Dot
+            d3.select("#southAmericaDot")
+                            .transition()
+                            .duration(200)
+                            .attr("r", (250 * (topYearData["South America"] / numSongsTop)));
+
+            //South East Dot
+            d3.select("#southEastDot")
+                            .transition()
+                            .duration(200)
+                            .attr("r", (250 * (topYearData["South East"] / numSongsTop)));
+
+            //South West Dot
+            d3.select("#southWestDot")
+                            .transition()
+                            .duration(200)
+                            .attr("r", (250 * (topYearData["South West"] / numSongsTop)));
+
+            //Southeast Asia Dot
+            d3.select("#southeastAsiaDot")
+                            .transition()
+                            .duration(200)
+                            .attr("r", (250 * (topYearData["Southeast Asia"] / numSongsTop)));
+
+            //Southern Africa Dot
+            d3.select("#southernAfricaDot")
+                            .transition()
+                            .duration(200)
+                            .attr("r", (250 * (topYearData["Southern Africa"] / numSongsTop)));
+
+            //West Dot
+            d3.select("#westDot")
+                            .transition()
+                            .duration(200)
+                            .attr("r", (250 * (topYearData["West"] / numSongsTop)));
+
+            //Western Europe Dot
+            d3.select("#westernEuropeDot")
+                            .transition()
+                            .duration(200)
+                            .attr("r", (250 * (topYearData["Western Europe"] / numSongsTop)));
         
         
         

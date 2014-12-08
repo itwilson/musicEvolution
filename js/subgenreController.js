@@ -32,12 +32,12 @@
     
 });*/
 
-var previousYear = 0;
+
 
 
 var treemapPlot = function(){
     
-    var margin = {top: 40, right: 10, bottom: 10, left: 10},
+    var margin = {top: 0, right: 10, bottom: 10, left: 10},
         width = 300 - margin.left - margin.right,
         height = 500;
 
@@ -51,23 +51,21 @@ var treemapPlot = function(){
     //Get the current year
             var topYear = $('#topCurrent').text();
             var bottomYear = $('#bottomCurrent').text();
-    
-    if (topYear == previousYear){
-        //Dont do anything
-    }else{
-        //Clear out the treemap
-        $('#treemapLeft').empty();
         
-        previousYear = topYear;
 
-        var div = d3.select("#treemapLeft").append("div")
+        
+
+        d3.json("tree.json", function(error, root) {
+            
+            $('#treemapLeft').empty();
+            
+            var div1 = d3.select("#treemapLeft").append("div")
             .style("position", "relative")
             .style("width", (width + margin.left + margin.right) + "px")
             .style("height", (height + margin.top + margin.bottom) + "px")
             .style("left", margin.left + "px")
             .style("top", margin.top + "px");
-
-        d3.json("tree.json", function(error, root) {
+            
             var topYear = $('#topCurrent').text();
             var data = root.children;
 
@@ -83,27 +81,16 @@ var treemapPlot = function(){
                                  ]
                                 };
 
-            console.log(subGenreData);
 
-          var node = div.datum(subGenreData).selectAll(".node")
+          var node = div1.datum(subGenreData).selectAll(".node")
               .data(treemap.nodes)
             .enter().append("div")
               .attr("class", "node")
               .call(position)
-              .style("background", function(d) { return d.children ? color(d.name) : null; })
+              .style("background", function(d) { return d.children ? "steelblue" : null; })
               .text(function(d) { return d.children ? null : d.name; });
 
-          d3.selectAll("input").on("change", function change() {
-            var value = this.value === "count"
-                ? function() { return 1; }
-                : function(d) { return d.size; };
-
-            node
-                .data(treemap.value(value).nodes)
-              .transition()
-                .duration(1)
-                .call(position);
-          });
+          
         });
 
         function position() {
@@ -112,8 +99,70 @@ var treemapPlot = function(){
               .style("width", function(d) { return Math.max(0, d.dx - 1) + "px"; })
               .style("height", function(d) { return Math.max(0, d.dy - 1) + "px"; });
         };
-    };
+    
+    /////////////////\\\\\\\\\\\\\
+    //////THE RIGHT TREEMAP\\\\\\\
+    /////////////////\\\\\\\\\\\\\
+    
+ 
+        
+        
+ 
+
+        
+        d3.json("tree.json", function(error, root) {
+            //Clear out the treemap
+            $('#treemapRight').empty();
+            
+            var treemap2 = d3.layout.treemap()
+                .size([width, height])
+                .sticky(true)
+                .value(function(d) { return d.size; });
+        
+            var div = d3.select("#treemapRight").append("div")
+                .style("position", "relative")
+                .style("width", (width + margin.left + margin.right) + "px")
+                .style("height", (height + margin.top + margin.bottom) + "px")
+                .style("left", margin.left + "px")
+                .style("top", margin.top + "px");
+
+            
+            
+            var bottomYear = $('#bottomCurrent').text();
+            var data = root.children;
+
+
+            thisYear = (_.where(data, {name: bottomYear}))[0];
+
+
+            var subGenreData2 = 
+                                {
+                                 "name": "flare",
+                                 "children": [
+                                    thisYear
+                                 ]
+                                };
+
+
+          var rightNode = div.datum(subGenreData2).selectAll(".node")
+              .data(treemap2.nodes)
+            .enter().append("div")
+              .attr("class", "node")
+              .call(position2)
+              .style("background", function(d) { return d.children ? "green" : null; })
+              .text(function(d) { return d.children ? null : d.name; });
+
+          
+        });
+
+        function position2() {
+          this.style("left", function(d) { return (d.x + 0) + "px"; })
+              .style("top", function(d) { return d.y + "px"; })
+              .style("width", function(d) { return Math.max(0, d.dx - 1) + "px"; })
+              .style("height", function(d) { return Math.max(0, d.dy - 1) + "px"; });
+        };
 };
+
 treemapPlot();
 
 //Update Values
