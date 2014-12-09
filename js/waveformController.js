@@ -359,7 +359,7 @@ var wavePlot = function() {
     });
     
     //Plot the hotness values for top
-    d3.csv('data/waveform/' + genre1Selected + 'hotness.csv', function(data) {
+    d3.csv('data/waveform/' + genre1Selected + '/hotness.csv', function(data) {
         var numSongsTop = parseInt($('#numSongs1').text());
         var topYear = $('#topCurrent').text();
         var hotnessData = _.where(data, {Year: topYear});
