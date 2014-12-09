@@ -16,16 +16,23 @@
 
 #viewSelect1 {
     margin-left:10px;
+    height:50px;
+    font-size: 20px;
+    margin-top:-5px;
 }
 
 #viewSelect2 {
     position:absolute;
     left:50%;
+     height:50px;
+    font-size: 20px;
+    margin-top:-5px;
 }
 
 .filterControls {
     width:100%;
     height:50px;
+    
 }
 
 .timeline {
@@ -54,21 +61,25 @@
 }
 
 .node {
-  border: solid 1px white;
-  font: 10px sans-serif;
-  line-height: 12px;
-  overflow: hidden;
-  position: absolute;
-  text-indent: 2px;
+    border: solid 1px white;
+    font: 10px sans-serif;
+    line-height: 12px;
+    overflow: hidden;
+    position: absolute;
+    text-indent: 2px;
+    font-size:20px;
+    padding-top: 5px;
 }
 
 #genre1cloud {
     display:inline-block;
+    background-color:rgba(176, 196, 222, 0.38);
 }
 
 #genre2cloud {
     display:inline-block;
     margin-left:20px;
+    background-color:rgba(176, 222, 183, 0.46)
 }
 
 select {

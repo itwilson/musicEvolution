@@ -23,43 +23,27 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.*/
 
 var lyricsUpdate = function(){
 
-    d3.json("data/rockLyrics.json", function(error, data){
+    
+    d3.json("data/lyrics/" + genre1Selected +".json", function(error, data){
     
         
     //Empty the clouds previously made. Transition someday...
     $("#genre1cloud").empty();
-    $("#genre2cloud").empty();
     
         
     //Get the words
     var topYear = $("#topCurrent").text();
     var topLyrics = (_.findWhere(data, {year: topYear})).words;
-
-    var bottomYear = $("#bottomCurrent").text();
-    var bottomLyrics = (_.findWhere(data, {year: bottomYear})).words;
-        
         
     //Split the values for better structure
     var keysTop = _.keys(topLyrics);
     var valuesTop = _.values(topLyrics);
-        
-    var keysBottom = _.keys(bottomLyrics);
-    var valuesBottom = _.values(bottomLyrics);
     
     //Build the new structure
     var wordsTop = [];
     
     for (i = 0; i < keysTop.length; i++){
             wordsTop.push({"text":keysTop[i], "size":valuesTop[i]});
-               //push the words in the right number of times
-            
-    };
-        
-    //Build the new structure Bottom
-    var wordsBottom = [];
-    
-    for (i = 0; i < keysBottom.length; i++){
-            wordsBottom.push({"text":keysBottom[i], "size":valuesBottom[i]});
                //push the words in the right number of times
             
     };
@@ -93,6 +77,34 @@ var lyricsUpdate = function(){
             })
             .text(function(d) { return d.text; });
         }
+
+    });
+    
+    d3.json("data/lyrics/" + genre2Selected +".json", function(error, data){
+    
+        
+    //Empty the clouds previously made. Transition someday...
+    $("#genre2cloud").empty();
+
+    var bottomYear = $("#bottomCurrent").text();
+    var bottomLyrics = (_.findWhere(data, {year: bottomYear})).words;
+   
+    //Split the values for better structure
+    
+    var keysBottom = _.keys(bottomLyrics);
+    var valuesBottom = _.values(bottomLyrics);
+        
+    //Build the new structure Bottom
+    var wordsBottom = [];
+    
+    for (i = 0; i < keysBottom.length; i++){
+            wordsBottom.push({"text":keysBottom[i], "size":valuesBottom[i]});
+               //push the words in the right number of times
+            
+    };
+ 
+        var fill = d3.scale.category20();
+        
         
         d3.layout.cloud().size([350, 500])
             .words(wordsBottom.map(function(d) {
@@ -127,6 +139,7 @@ var lyricsUpdate = function(){
 
 
     });
+
 };
 
 lyricsUpdate();

@@ -2,34 +2,31 @@
     ///////////////////////////////////
     //GetData Function//////////////////////////
     ///////////////////////////////////
-
-    /*d3.csv('data/rock4.csv', function(data) {
+    /*
+    d3.csv('data/PopResults.csv', function(data) {
     
         var tableHead = $('#tableHead');
-        for (i = 0.2; i < 1;){
+        for (i = 40; i < 240;){
               tableHead.append("<th>" + i + "</th>");
-            i += .02
+            i += 5;
         };
         
-        
+        console.log(data);
         for (y = 1960; y < 2015; y++){
             var year = (y).toString();
             var thisYear = _.where(data, {Year: year});
-            var durationValues = _.pluck(thisYear, 'Hotness');
-
-
-
+            var durationValues = _.pluck(thisYear, 'Tempo');
 
             var durChunks = _.countBy(durationValues, function(num) {
-                for (i = 0.2; i < 1;) {
+                for (i = 40; i < 240;) {
                     if (num < i) {
                         return i;
                         break;
                     };
-                    i += .02;
+                    i += 5;
                 };
             });
-
+            console.log(durChunks);
             
 
             var dataTable = $('#dataTable');
@@ -38,7 +35,7 @@
             $("#" + year).append("<td>" + year + "</td>");
 
             dataTable
-            for (i = 0.2; i < 1; i+=.02){
+            for (i = 40; i < 240; i+=5){
                 if(durChunks.hasOwnProperty(i)){
                     $("#" + year).append("<td>" + durChunks[i] + "</td>");
 
@@ -55,8 +52,8 @@
         
     
         
-    });*/
-
+    });
+*/
 
 ///////////////////////////////////
 //PlotWav//////////////////////////
@@ -96,8 +93,10 @@ var wavePlot = function() {
 
     
     
+    
+    
     //Plot the duration values for top
-    d3.csv('data/duration.csv', function(data) {
+    d3.csv('data/waveform/' + genre1Selected +'/duration.csv', function(data) {
         //Get the data for the years
         var numSongsTop = parseInt($('#numSongs1').text());
         var topYear = $('#topCurrent').text();
@@ -121,7 +120,7 @@ var wavePlot = function() {
         
         //Update Functions
         $('#start, #end').click(function() {
-            d3.csv('data/duration.csv', function(data) {
+            d3.csv('data/waveform/' + genre1Selected + '/duration.csv', function(data) {
                 var numSongsTop = parseInt($('#numSongs1').text());
                 var topYear = $('#topCurrent').text();
 
@@ -141,7 +140,7 @@ var wavePlot = function() {
     });
     
     //Plot the duration values for Bottom
-    d3.csv('data/duration.csv', function(data) {
+    d3.csv('data/waveform/' + genre2Selected + '/duration.csv', function(data) {
         //Get the data for the years
         var numSongsBottom = parseInt($('#numSongs2').text());
         var bottomYear = $('#bottomCurrent').text();
@@ -165,7 +164,7 @@ var wavePlot = function() {
         
         //Update Functions
         $('#start, #end').click(function() {
-            d3.csv('data/duration.csv', function(data) {
+            d3.csv('data/waveform/' + genre2Selected + '/duration.csv', function(data) {
                 var numSongsBottom = parseInt($('#numSongs2').text());
                 var bottomYear = $('#bottomCurrent').text();
 
@@ -186,7 +185,7 @@ var wavePlot = function() {
 
     
     //Plot the loudness values for top
-    d3.csv('data/loudness.csv', function(data) {
+    d3.csv('data/waveform/' + genre1Selected + '/loudness.csv', function(data) {
         var numSongsTop = parseInt($('#numSongs1').text());
         var topYear = $('#topCurrent').text();
         var loudData = _.where(data, {Year: topYear});
@@ -210,11 +209,11 @@ var wavePlot = function() {
         //Update Functions
         $('#start, #end').click(function() {
             var numSongsTop = parseInt($('#numSongs1').text());
-            d3.csv('data/loudness.csv', function(data) {
+            d3.csv('data/waveform/' + genre1Selected  + '/loudness.csv', function(data) {
                 var topYear = $('#topCurrent').text();
 
                 var loudData = _.where(data, {Year: topYear});
-                delete loudData[0]["Year"];
+                
 
 
                 var loudValues = _.values(loudData[0]);
@@ -231,7 +230,7 @@ var wavePlot = function() {
     });
     
     //Plot the loudness values for Bottom
-    d3.csv('data/loudness.csv', function(data) {
+    d3.csv('data/waveform/' + genre2Selected + '/loudness.csv', function(data) {
         var numSongsBottom = parseInt($('#numSongs2').text());
         var bottomYear = $('#bottomCurrent').text();
         var loudData = _.where(data, {Year: bottomYear});
@@ -255,7 +254,7 @@ var wavePlot = function() {
         //Update Functions
         $('#start, #end').click(function() {
             var numSongsBottom = parseInt($('#numSongs2').text());
-            d3.csv('data/loudness.csv', function(data) {
+            d3.csv('data/waveform/' + genre2Selected + '/loudness.csv', function(data) {
                 var bottomYear = $('#bottomCurrent').text();
 
                 var loudData = _.where(data, {Year: bottomYear});
@@ -276,7 +275,7 @@ var wavePlot = function() {
     });
     
     //Plot the tempo values for top
-    d3.csv('data/tempo.csv', function(data) {
+    d3.csv('data/waveform/' + genre1Selected + '/tempo.csv', function(data) {
         var numSongsTop = parseInt($('#numSongs1').text());
         var topYear = $('#topCurrent').text();
         var tempoData = _.where(data, {Year: topYear});
@@ -297,7 +296,7 @@ var wavePlot = function() {
         //Update Functions
         $('#start, #end').click(function() {
             var numSongsTop = parseInt($('#numSongs1').text());
-            d3.csv('data/tempo.csv', function(data) {
+            d3.csv('data/waveform/' + genre1Selected + '/tempo.csv', function(data) {
                 var topYear = $('#topCurrent').text();
 
                 var tempoData = _.where(data, {Year: topYear});
@@ -318,7 +317,7 @@ var wavePlot = function() {
     });
     
     //Plot the tempo values for bottom
-    d3.csv('data/tempo.csv', function(data) {
+    d3.csv('data/waveform/' + genre2Selected + '/tempo.csv', function(data) {
         var numSongsBottom = parseInt($('#numSongs2').text());
         var bottomYear = $('#bottomCurrent').text();
         var tempoData = _.where(data, {Year: bottomYear});
@@ -339,7 +338,7 @@ var wavePlot = function() {
         //Update Functions
         $('#start, #end').click(function() {
             var numSongsBottom = parseInt($('#numSongs2').text());
-            d3.csv('data/tempo.csv', function(data) {
+            d3.csv('data/waveform/'+ genre2Selected + '/tempo.csv', function(data) {
                 var bottomYear = $('#bottomCurrent').text();
 
                 var tempoData = _.where(data, {Year: bottomYear});
@@ -360,7 +359,7 @@ var wavePlot = function() {
     });
     
     //Plot the hotness values for top
-    d3.csv('data/hotness.csv', function(data) {
+    d3.csv('data/waveform/' + genre1Selected + 'hotness.csv', function(data) {
         var numSongsTop = parseInt($('#numSongs1').text());
         var topYear = $('#topCurrent').text();
         var hotnessData = _.where(data, {Year: topYear});
@@ -382,7 +381,7 @@ var wavePlot = function() {
         //Update Functions
         $('#start, #end').click(function() {
             var numSongsTop = parseInt($('#numSongs1').text());
-            d3.csv('data/hotness.csv', function(data) {
+            d3.csv('data/waveform/' + genre1Selected + '/hotness.csv', function(data) {
                 var topYear = $('#topCurrent').text();
 
                 var hotnessData = _.where(data, {Year: topYear});
@@ -403,7 +402,7 @@ var wavePlot = function() {
     });
     
     //Plot the hotness values for Bottom
-    d3.csv('data/hotness.csv', function(data) {
+    d3.csv('data/waveform/' + genre2Selected + '/hotness.csv', function(data) {
         var numSongsBottom = parseInt($('#numSongs2').text());
         var bottomYear = $('#bottomCurrent').text();
         var hotnessData = _.where(data, {Year: bottomYear});
@@ -425,7 +424,7 @@ var wavePlot = function() {
         //Update Functions
         $('#start, #end').click(function() {
             var numSongsBottom = parseInt($('#numSongs2').text());
-            d3.csv('data/hotness.csv', function(data) {
+            d3.csv('data/waveform/' + genre2Selected + '/hotness.csv', function(data) {
                 var bottomYear = $('#bottomCurrent').text();
 
                 var hotnessData = _.where(data, {Year: bottomYear});
@@ -462,7 +461,7 @@ var waveUpdate = function(){
     
  
     
-    d3.csv('data/duration.csv', function(data) {
+    d3.csv('data/waveform/' + genre1Selected + '/duration.csv', function(data) {
 
         var numSongsTop = parseInt($('#numSongs1').text());
         var topYear = $('#topCurrent').text();
@@ -484,7 +483,7 @@ var waveUpdate = function(){
         
     });
     
-    d3.csv('data/duration.csv', function(data) {
+    d3.csv('data/waveform/' + genre2Selected + '/duration.csv', function(data) {
 
         var numSongsBottom = parseInt($('#numSongs2').text());
         var bottomYear = $('#bottomCurrent').text();
@@ -505,7 +504,7 @@ var waveUpdate = function(){
         
     });
     
-    d3.csv('data/loudness.csv', function(data) {
+    d3.csv('data/waveform/' + genre1Selected + '/loudness.csv', function(data) {
         var topYear = $('#topCurrent').text();
         
         var loudData = _.where(data, {Year: topYear});
@@ -525,7 +524,7 @@ var waveUpdate = function(){
         
     });
     
-    d3.csv('data/loudness.csv', function(data) {
+    d3.csv('data/waveform/' + genre2Selected + '/loudness.csv', function(data) {
         var bottomYear = $('#bottomCurrent').text();
         
         var loudData = _.where(data, {Year: bottomYear});
@@ -545,7 +544,7 @@ var waveUpdate = function(){
         
     });
     
-    d3.csv('data/tempo.csv', function(data) {
+    d3.csv('data/waveform/' + genre1Selected + '/tempo.csv', function(data) {
         var topYear = $('#topCurrent').text();
         
         var tempoData = _.where(data, {Year: topYear});
@@ -565,7 +564,7 @@ var waveUpdate = function(){
         
     });
     
-    d3.csv('data/tempo.csv', function(data) {
+    d3.csv('data/waveform/' + genre2Selected + '/tempo.csv', function(data) {
         var bottomYear = $('#bottomCurrent').text();
         
         var tempoData = _.where(data, {Year: bottomYear});
@@ -585,7 +584,7 @@ var waveUpdate = function(){
         
     });
     
-    d3.csv('data/hotness.csv', function(data) {
+    d3.csv('data/waveform/' + genre1Selected +'/hotness.csv', function(data) {
         var topYear = $('#topCurrent').text();
         
         var hotnessData = _.where(data, {Year: topYear});
@@ -605,7 +604,7 @@ var waveUpdate = function(){
         
     });
     
-    d3.csv('data/hotness.csv', function(data) {
+    d3.csv('data/waveform/' + genre2Selected + '/hotness.csv', function(data) {
         var bottomYear = $('#bottomCurrent').text();
         
         var hotnessData = _.where(data, {Year: bottomYear});

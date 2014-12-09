@@ -2,19 +2,18 @@
 
 //Function for getting the subgenres. DONE
 
-/*d3.csv('data/rock4.csv', function(data) {
+/*d3.csv('data/subgenres/' + genre1Selected + '.csv', function(data) {
 
     
     for (y = 1960; y < 2015; y++){
         var currentYear = (y).toString();
 
         var yearData = _.where(data, {Year: currentYear});
-        var subGenres = _.pluck(yearData, 'Sub Genre');
-        var subGenresChunked = _.countBy(subGenres);
 
-        var subGenresValues = _.values(subGenresChunked);
-        var subGenresKeys = _.keys(subGenresChunked);
-
+        
+        var subGenresValues = _.values(yearData[0]);
+        var subGenresKeys = _.keys(yearData[0]);
+        
         var dataTable = $('#dataTable');
 
         dataTable.append("<div>" + "{" +"</div>");
@@ -55,7 +54,7 @@ var treemapPlot = function(){
 
         
 
-        d3.json("tree.json", function(error, root) {
+        d3.json("data/subgenres/" + genre1Selected + ".json", function(error, root) {
             
             $('#treemapLeft').empty();
             
@@ -110,9 +109,11 @@ var treemapPlot = function(){
  
 
         
-        d3.json("tree.json", function(error, root) {
+        d3.json("data/subgenres/" + genre2Selected + ".json", function(error, root) {
             //Clear out the treemap
             $('#treemapRight').empty();
+            console.log(error);
+            if (root.length !=0){
             
             var treemap2 = d3.layout.treemap()
                 .size([width, height])
@@ -152,7 +153,7 @@ var treemapPlot = function(){
               .style("background", function(d) { return d.children ? "green" : null; })
               .text(function(d) { return d.children ? null : d.name; });
 
-          
+            };
         });
 
         function position2() {
@@ -161,6 +162,7 @@ var treemapPlot = function(){
               .style("width", function(d) { return Math.max(0, d.dx - 1) + "px"; })
               .style("height", function(d) { return Math.max(0, d.dy - 1) + "px"; });
         };
+        
 };
 
 treemapPlot();
